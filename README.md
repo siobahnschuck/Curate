@@ -13,9 +13,11 @@
 
 ### **_Description_**
 
-! ENTER LOGO HERE !
+![](./img/logo_400px.png)
 
-Curate allows the user to create drawings in their "studio", save them to their profile, and organize them into an exhibition which can be published shared with friends. Browse other exhibitions, and find collaborators. Curate brings a virtual gallery to anyone's door step. 
+Curate allows the user to create drawings in their "studio", save them to their profile, and organize them into an exhibition which can be published and shared with friends. When you aren't creating you can browse other exhibitions, and find collaborators. 
+
+Curate brings a virtual gallery to anyone's door step. 
 
 ---
 

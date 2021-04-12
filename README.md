@@ -15,7 +15,7 @@
 
 ! ENTER LOGO HERE !
 
-Curate allows the user to browse through museum collections, and select work to display in their gallery which is directly connected to their profile. Users can create multiple exhibitions and share them with colleges, friends, and other social media sites. 
+Curate allows the user to create drawings in their "studio", save them to their profile, and organize them into an exhibition which can be published shared with friends. Browse other exhibitions, and find collaborators. Curate brings a virtual gallery to anyone's door step. 
 
 ---
 
@@ -50,10 +50,11 @@ Otherwise view the website [here]()
 
 - 3D gallery space
 - Share to other social media sites
+- Collaboratively draw with friends
+- Comment, save, and like other galleries 
+- Chat with other artists that you follow 
 
 ---
 
 ### **_Credits_**
 
-- AIC API
-- ARTSY

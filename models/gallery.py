@@ -14,6 +14,8 @@ class Gallery(db.Model):
     ), nullable=False, onupdate=datetime.now())
     user = db.relationship(
         'User', backref=db.backref('users_gallery', lazy=True))
+    drawings = db.relationship(
+        'Drawing', backref=db.backref('gallery_drawings', lazy=True))
 
     def __init__(self, user_id, exhibition_title, description):
         self.user_id = user_id

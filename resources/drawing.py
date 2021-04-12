@@ -7,10 +7,11 @@ from models.db import db
 class Drawings(Resource):
     def get(self):
         drawings = Drawing.find_all()
-        return [data.json() from data in drawings]
+        return [data.json() for data in drawings]
 
     def post(self):
-        data = request.get_json
+        data = request.get_json()
+        print(data)
         drawing = Drawing(**data)
         drawing.create()
         return drawing.json(), 201

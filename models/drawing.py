@@ -18,7 +18,7 @@ class Drawing(db.Model):
     user = db.relationship(
         'User', backref=db.backref('users_drawing', lazy=True))
     gallery = db.relationship(
-        'Gallery', backref=db.backref('galleries', lazy=True))
+        'Gallery', backref=db.backref('gallery_drawings', lazy=True))
 
     def __init__(self, user_id, gallery_id, image, coordinates):
         self.user_id = user_id

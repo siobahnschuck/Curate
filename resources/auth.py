@@ -8,13 +8,13 @@ class Login(Resource):
     def post(self):
         data = request.get_json()
         user = User.find_one(data['email'])
-        if user and compare_password(data['password'], user.password_digest)
-        payload = {
-            "id": user.id,
-            "email": user.email
-        }
-        token = create_token(payload)
-        return {"token": token, "payload": payload}
+        if user and compare_password(data['password'], user.password_digest):
+            payload = {
+                "id": user.id,
+                "email": user.email
+            }
+            token = create_token(payload)
+            return {"token": token, "payload": payload}
         return {"msg": "UNAUTHORIZED USER"}, 401
 
     def get(self):
@@ -31,7 +31,9 @@ class Register(Resource):
         params = {
             "username": data['username'],
             "email": data['email'],
-            "password_digest": gen_password(data['password'])
+            "password_digest": gen_password(data['password']),
+            "bio": data['bio'],
+            "location": data['location']
         }
         user = User(**params)
         user.create()

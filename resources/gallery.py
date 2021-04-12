@@ -3,6 +3,7 @@ from flask_restful import Resource
 from models.gallery import Gallery
 from models.db import db
 
+
 class Galleries(Resource):
     def get(self):
         galleries = Gallery.find_all()
@@ -14,12 +15,13 @@ class Galleries(Resource):
         gallery.create()
         return gallery.json(), 201
 
+
 class SingleGallery(Resource):
     def put(self, gallery_id):
         data = request.get_json()
         gallery = Gallery.find_by_PK(gallery_id)
         for key in data:
-            setattr(galley, key, data[key])
+            setattr(gallery, key, data[key])
         db.session.commit()
         return gallery.json()
 

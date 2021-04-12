@@ -14,6 +14,10 @@ class User(db.Model):
         db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow(
     ), nullable=False, onupdate=datetime.utcnow)
+    drawings = db.relationship(
+        'Drawing', cascade='all', backref=db.backref('drawings', lazy=True))
+    galleries = db.relationship(
+        'Gallery', cascade='all', backref=db.backref('galleries', lazy=True))
 
     def __init__(self, username, email, password_digest, bio, location):
         self.username = username

@@ -1,0 +1,21 @@
+// *** AUTH TYPES *** //
+export const REGISTER = 'REGISTER'
+export const LOGIN = 'LOGIN'
+export const ADD_USER = 'ADD_USER'
+export const UPDATE_PROFILE = 'UPDATE_PROFILE'
+export const DELETE_PROFILE = 'DELETE_PROFILE'
+export const CHECK_SESSION = 'CHECK_SESSION'
+
+// *** GALLERY TYPES *** //
+export const CREATE_GALLERY = 'CREATE_GALLERY'
+export const ADD_GALLERY = 'ADD_GALLERY'
+export const GET_ALL_GALLERY = 'GET_ALL_GALLERY'
+export const GET_USER_GALLERY = 'GET_USER_GALLERY'
+export const UPDATE_GALLERY = 'UPDATE_GALLERY'
+export const DELETE_GALLERY = 'DELETE_GALLERY'
+
+// *** DRAWING TYPES *** //
+export const ADD_DRAWING = 'ADD_DRAWING'
+export const CREATE_DRAWING = 'CREATE_DRAWING'
+export const GET_USER_DRAWING = 'GET_USER_DRAWING'
+export const DELETE_DRAWING = 'DELETE_DRAWING'

@@ -25,7 +25,7 @@ const iState = {
 
 const AuthReducer = (state=iState, action) => {
   switch (action.type) {
-    case ADD_USER:
+    case REGISTER:
       return {
         ...state,
         registerForm: {
@@ -33,8 +33,6 @@ const AuthReducer = (state=iState, action) => {
           [action.payload.name]: action.payload.value
         }
       }
-    case REGISTER: 
-      return {...state}
     case LOGIN: 
       return {
         ...state, 

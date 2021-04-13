@@ -38,3 +38,21 @@ class Register(Resource):
         user = User(**params)
         user.create()
         return user.json(), 201
+
+
+class Profile(Resource):
+    def delete(self, user_id):
+        profile = User.find_by_PK(user_id)
+        if not profile:
+            return {"msg": "User not found"}, 404
+        db.session.delete(profile)
+        db.session.commit()
+        return{"msg": "User Deleted", "payload": user_id}
+
+    def put(self, user_id):
+        data = request.get_json()
+        profile = User.find_by_PK(user_id)
+        for key in data:
+            setattr(profile, key, data[key])
+        db.session.commit()
+        return profile.json()

@@ -39,9 +39,9 @@ export const getUserGallery = () => async (dispatch) => {
   }
 }
 
-export const createGallery = () => async (dispatch) => {
+export const createGallery = (body) => async (dispatch) => {
   try {
-    const newGallery = await CreateGallery()
+    const newGallery = await CreateGallery(body)
     dispatch({
       type: CREATE_GALLERY,
       payload: newGallery
@@ -51,9 +51,9 @@ export const createGallery = () => async (dispatch) => {
   }
 }
 
-export const deleteGallery = () => async (dispatch) => {
+export const deleteGallery = (id) => async (dispatch) => {
   try {
-    const deleted = await DeleteGallery()
+    const deleted = await DeleteGallery(id)
     dispatch({
       type: DELETE_GALLERY,
       payload: deleted
@@ -63,9 +63,9 @@ export const deleteGallery = () => async (dispatch) => {
   }
 }
 
-export const updateGallery = () => async (dispatch) => {
+export const updateGallery = (id) => async (dispatch) => {
   try {
-    const updated = await UpdateGallery()
+    const updated = await UpdateGallery(id)
     dispatch({
       type: UPDATE_GALLERY,
       payload: updated

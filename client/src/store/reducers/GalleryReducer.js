@@ -27,7 +27,7 @@ const GalleryReducer = (state=iState, action) => {
         }
       }
     case CREATE_GALLERY:
-      return {...state}
+      return {...state, userGalleries: [...state.userGalleries, state.newGaller]}
     case GET_USER_GALLERY:
       return {...state, userGalleries: [action.payload]}
     case GET_ALL_GALLERY:

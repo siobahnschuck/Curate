@@ -1,6 +1,7 @@
 from models.db import db
 from datetime import datetime
 from sqlalchemy.dialects.postgresql.json import JSONB
+import json
 
 
 class Drawing(db.Model):
@@ -27,7 +28,7 @@ class Drawing(db.Model):
         self.coordinates = coordinates
 
     def json(self):
-        return{"id": self.id, "user_id": self.user_id, "gallery_id": self.gallery_id, "image": self.image, "coordinates": self.coordinates, "created_at": str(self.created_at), "updated_at": str(self.updated_at)}
+        return{"id": self.id, "user_id": self.user_id, "gallery_id": self.gallery_id, "image": self.image, "coordinates": json.loads(self.coordinates), "created_at": str(self.created_at), "updated_at": str(self.updated_at)}
 
     def create(self):
         db.session.add(self)

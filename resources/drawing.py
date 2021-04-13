@@ -5,6 +5,7 @@ from middleware import allowed_file
 from aws import upload
 from models.drawing import Drawing
 from models.db import db
+import base64
 
 
 class Drawings(Resource):
@@ -13,11 +14,16 @@ class Drawings(Resource):
         return [data.json() for data in drawings]
 
     def post(self):
-        data = request.get_json()
-        print(data)
-        drawing = Drawing(**data)
-        drawing.create()
-        return drawing.json(), 201
+        data = request.form.to_dict()
+        file = request.files['image']
+        print(file.filename)
+        if file and allowed_file(file.filename):
+            file.filename = secure_filename(file.filename)
+            uploaded = upload(file)
+            drawing = Drawing(
+                data['user_id'], data['gallery_id'], uploaded, data['coordinates'])
+            drawing.create()
+            return drawing.json(), 201
 
 
 class SingleDrawing(Resource):

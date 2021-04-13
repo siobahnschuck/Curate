@@ -9,10 +9,7 @@ const {
 const iState = {
   drawings: [],
   isDrawing: false, 
-  newDrawing: {
-    image: '',
-    coordinates: null
-  }
+  coordinates: []
 }
 
 const DrawingReducer = (state= iState, action) => {
@@ -20,13 +17,10 @@ const DrawingReducer = (state= iState, action) => {
     case ADD_DRAWING:
       return {
         ...state, 
-        newDrawing: {
-          ...state.newDrawing,
-          [action.payload.name]: action.payload.value
-        }
+        coordinates: [...state.coordinates, action.payload]
       }
     case IS_DRAWING:
-      return {...state}
+      return {...state, isDrawing: action.payload}
     case GET_USER_DRAWING:
       return {...state, drawings: [...action.payload]}
     case CREATE_DRAWING:

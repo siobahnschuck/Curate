@@ -1,11 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-
-const Canvas = () => {
+const Canvas = (props) => {
 
   const canvasRef = useRef(null)
   const contextRef = useRef(null)
-  const [isDrawing, setIsDrawing] = useState(false)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -14,7 +12,7 @@ const Canvas = () => {
     canvas.style.height = `${window.innerHeight}px`
     canvas.style.width = `${window.innerWidth}px`
 
-    const context = canvas.getContext('2d')
+    const context = canvas.getContext('2d', { preserveDrawingBuffer: true })
     context.scale(2, 2)
     context.lineCap = 'round'
     context.strokeStyle = "black"
@@ -27,30 +25,48 @@ const Canvas = () => {
     contextRef.current.beginPath()
     contextRef.current.moveTo(offsetX, offsetY)
     console.log('start drawing', offsetX, offsetY)
-    setIsDrawing(true)
+    props.isADrawing(true)
   }
 
   const finishDrawing = () => {
     contextRef.current.closePath()
-    setIsDrawing(false)
+    props.isADrawing(false)
   }
   const draw = ({ nativeEvent }) => {
-    if (!isDrawing) {
+    if (!props.isDrawing) {
       return
     }
     const { offsetX, offsetY } = nativeEvent
-    console.log("drawing", offsetX, offsetY)
     contextRef.current.lineTo(offsetX, offsetY)
     contextRef.current.stroke()
+    props.setNewCoordinates({ x: offsetX, y: offsetY })
+  }
+
+  const clearDrawing = () => {
+    contextRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+  }
+
+  const saveDrawing = async () => {
+    const save = canvasRef.current.toDataURL('image/png')
+    const data = save.replace(/^data:image\/\w+:base64,/, '')
+    const buf = Buffer.from(data, 'base64')
+    await props.addNewDrawing(save, 'tryAgain', props.coordinates)
   }
 
   return (
-    <canvas
-      onMouseDown={startDrawing}
-      onMouseUp={finishDrawing}
-      onMouseMove={draw}
-      ref={canvasRef}
-    />
+    <div>
+      <canvas
+        height={window.innerHeight * 2}
+        width={window.innerWidth * 2}
+        style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px` }}
+        onMouseDown={startDrawing}
+        onMouseUp={finishDrawing}
+        onMouseMove={draw}
+        ref={canvasRef}
+      />
+      <button onClick={clearDrawing}>clear from canvas</button>
+      <button onClick={saveDrawing}>save from canvas</button>
+    </div>
   )
 }
 

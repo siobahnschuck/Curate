@@ -48,15 +48,42 @@ export const deleteDrawing = () => async (dispatch) => {
   }
 }
 
-export const addDrawing = (name, value) => ({
-  type: ADD_DRAWING,
-  payload: {
-    name: name,
-    value: value
+export const addDrawing = (value, fileName, coords) => async (dispatch) =>  {
+  try {
+    async function urltoFile(url, filename, mimeType) {
+      // let res = await fetch(url)
+      // let buf = res.arrayBuffer()
+      return new File(Buffer.from(url.replace(/^data:image\/\w+;base64,/, ""),'base64'), `${filename}.png`, { type: mimeType })
+    }
+    let file = await urltoFile(value, fileName, 'image/png')
+    // let file = new File(value, `${fileName}.png`, { type: 'image/png' })
+    // function dataURItoBlob(dataURI) {
+    //   var binary = atob(dataURI.split(',')[1]);
+    //   var array = [];
+    //   for(var i = 0; i < binary.length; i++) {
+    //       array.push(binary.charCodeAt(i));
+    //     }
+    //     return new Blob([new Uint8Array(array)], {type: 'image/png'});
+    //   }
+    // let file = value
+    console.log(file)
+    const formData = new FormData()
+    formData.append("image", file)
+    formData.append("coordinates", JSON.stringify(coords))
+    formData.append("user_id", 3)
+    formData.append("gallery_id", 2)
+    await dispatch(createDrawing(formData))
+  } catch (error) {
+    throw error
   }
-})
+}
 
 export const isDrawing = (formValue) => ({
   type: IS_DRAWING,
   payload: formValue
+})
+
+export const setCoordinates = (coordinates) => ({
+  type: ADD_DRAWING,
+  payload: coordinates
 })

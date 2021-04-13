@@ -1,0 +1,11 @@
+.header {
+  background-color: black;
+  height: 8vh;
+  color: white;
+}
+
+.nav-elements {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

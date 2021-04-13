@@ -9,6 +9,7 @@ import {
   CREATE_DRAWING,
   GET_USER_DRAWING,
   DELETE_DRAWING,
+  IS_DRAWING,
 } from '../types'
 
 export const getDrawings = () => async (dispatch) => {
@@ -53,4 +54,9 @@ export const addDrawing = (name, value) => ({
     name: name,
     value: value
   }
+})
+
+export const isDrawing = (formValue) => ({
+  type: IS_DRAWING,
+  payload: formValue
 })

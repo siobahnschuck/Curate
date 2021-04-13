@@ -2,6 +2,7 @@
 export const REGISTER = 'REGISTER'
 export const LOGIN = 'LOGIN'
 export const ADD_USER = 'ADD_USER'
+export const ADD_LOGIN= 'ADD_LOGIN'
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
 export const DELETE_PROFILE = 'DELETE_PROFILE'
 export const CHECK_SESSION = 'CHECK_SESSION'
@@ -16,6 +17,7 @@ export const DELETE_GALLERY = 'DELETE_GALLERY'
 
 // *** DRAWING TYPES *** //
 export const ADD_DRAWING = 'ADD_DRAWING'
+export const IS_DRAWING = 'IS_DRAWING'
 export const CREATE_DRAWING = 'CREATE_DRAWING'
 export const GET_USER_DRAWING = 'GET_USER_DRAWING'
 export const DELETE_DRAWING = 'DELETE_DRAWING'

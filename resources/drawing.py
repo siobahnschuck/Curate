@@ -1,5 +1,8 @@
 from flask import request
 from flask_restful import Resource
+from werkzeug.utils import secure_filename
+from middleware import allowed_file
+from aws import upload
 from models.drawing import Drawing
 from models.db import db
 

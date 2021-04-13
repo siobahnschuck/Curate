@@ -3,7 +3,8 @@ const {
   LOGIN, 
   UPDATE_PROFILE, 
   DELETE_PROFILE,
-  ADD_USER
+  ADD_USER,
+  ADD_LOGIN
 } = require('../types.js')
 
 const iState = {
@@ -25,7 +26,7 @@ const iState = {
 
 const AuthReducer = (state=iState, action) => {
   switch (action.type) {
-    case REGISTER:
+    case ADD_USER:
       return {
         ...state,
         registerForm: {
@@ -33,7 +34,7 @@ const AuthReducer = (state=iState, action) => {
           [action.payload.name]: action.payload.value
         }
       }
-    case LOGIN: 
+    case ADD_LOGIN: 
       return {
         ...state, 
         loginForm: {
@@ -41,6 +42,10 @@ const AuthReducer = (state=iState, action) => {
           [action.payload.name]: action.payload.value
         }
       }
+    case REGISTER:
+      return {...state}
+    case LOGIN:
+      return {...state}
     case UPDATE_PROFILE:
       return {
         ...state,

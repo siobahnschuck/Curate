@@ -36,3 +36,7 @@ def strip_token(req):
         return token
     except:
         return None
+
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg'}
+    return '.' in filename and filename.split('.', 1)[1].lower() in ALLOWED_EXTENSIONS

@@ -8,9 +8,9 @@ const {
 } = require('../types')
 
 const iState = {
-  userGalleries = [],
-  allGalleries = [],
-  newGallery = {
+  userGalleries: [],
+  allGalleries: [],
+  newGallery: {
     exhibition_title: '',
     description: ''
   }

@@ -1,9 +1,26 @@
 import React from 'react'
+import '../../css/Header.css'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
   return (
-    <div>
-      <h1>THIS IS THE HEADER</h1>
+    <div className="header">
+      <div className="nav-elements">
+        <NavLink className="nav-element" to="/" style={{ textDecoration: "none", color: "white" }}>
+          Home
+        </NavLink>
+        <NavLink className="nav-element" to="/" style={{ textDecoration: "none", color: "white" }}>
+          Sign In
+        </NavLink>
+        <NavLink className="nav-element" to="/" style={{ textDecoration: "none", color: "white" }}>
+          Sign Up
+        </NavLink>
+        <NavLink className="nav-element" to="/studio" style={{ textDecoration: "none", color: "white" }}>
+          Studio
+        </NavLink>
+      </div>
     </div>
   )
 }
+
+export default Header

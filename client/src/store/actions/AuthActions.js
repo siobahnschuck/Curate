@@ -10,11 +10,31 @@ import {
   LOGIN,
   UPDATE_PROFILE,
   DELETE_PROFILE,
+  ADD_USER,
+  ADD_LOGIN,
 } from '../types'
 
-export const createLogin = () => async (dispatch) => {
+
+export const addUser = (name, value) => ({
+  type: ADD_USER,
+  payload:{
+    name: name,
+    value: value
+  }
+})
+
+export const addLogin = (name, value) => ({
+  type: ADD_LOGIN,
+  payload:{
+    name: name,
+    value: value
+  }
+})
+
+
+export const createLogin = (formData) => async (dispatch) => {
   try {
-    const login = await Login()
+    const login = await Login(formData)
     dispatch({
       type: LOGIN,
       payload: login
@@ -24,9 +44,9 @@ export const createLogin = () => async (dispatch) => {
   }
 }
 
-export const createUser = () => async (dispatch) => {
+export const createUser = (formData) => async (dispatch) => {
   try {
-    const register = await Register()
+    const register = await Register(formData)
     dispatch({
       type: REGISTER,
       payload: register
@@ -48,7 +68,7 @@ export const deleteProfile = () => async (dispatch) => {
   }
 }
 
-export const updateProfile = () => (dispatch) => {
+export const updateProfile = () => async (dispatch) => {
   try {
     const updated = await UpdateProfile()
     dispatch({

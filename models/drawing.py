@@ -23,7 +23,7 @@ class Drawing(db.Model):
     def __init__(self, user_id, gallery_id, image, coordinates):
         self.user_id = user_id
         self.gallery_id = gallery_id
-        self.image = image
+        self.image = image or None
         self.coordinates = coordinates
 
     def json(self):

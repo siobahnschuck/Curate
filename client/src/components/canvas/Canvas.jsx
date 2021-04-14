@@ -46,11 +46,19 @@ const Canvas = (props) => {
     contextRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
   }
 
+  function convertToBlob(base64data) {
+    var bs = atob(base64data);
+    var buffer = new ArrayBuffer(bs.length);
+    var ba = new Uint8Array(buffer);
+    for (var i = 0; i < bs.length; i++) {
+      ba[i] = bs.charCodeAt(i);
+    }
+    return new Blob([ba], { type: "image/png" });
+  }
   const saveDrawing = async () => {
     const save = canvasRef.current.toDataURL('image/png')
-    const data = save.replace(/^data:image\/\w+:base64,/, '')
-    const buf = Buffer.from(data, 'base64')
-    await props.addNewDrawing(save, 'tryAgain', props.coordinates)
+    let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
+    await props.addNewDrawing(blob, 'tryAgain', props.coordinates)
   }
 
   return (
@@ -65,7 +73,10 @@ const Canvas = (props) => {
         ref={canvasRef}
       />
       <button onClick={clearDrawing}>clear from canvas</button>
-      <button onClick={saveDrawing}>save from canvas</button>
+      <form>
+        <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
+        <button onClick={saveDrawing}>save from canvas</button>
+      </form>
     </div>
   )
 }

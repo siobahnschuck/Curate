@@ -8,7 +8,8 @@ import {
   getDrawings,
   createDrawing,
   deleteDrawing,
-  setCoordinates
+  setCoordinates,
+  setFilename
 } from '../../store/actions/DrawingActions'
 
 const mapStateToProps = ({ drawState }) => {
@@ -22,13 +23,16 @@ const mapDispatchToProps = (dispatch) => {
     createNewDrawing: (body) => dispatch(createDrawing(body)),
     fetchDrawings: () => dispatch(getDrawings()),
     deleteADrawing: (id) => dispatch(deleteDrawing(id)),
-    setNewCoordinates: (coordinates) => dispatch(setCoordinates(coordinates))
+    setNewCoordinates: (coordinates) => dispatch(setCoordinates(coordinates)),
+    setFileName: (fileName) => dispatch(setFilename(fileName))
   }
 }
 
 
-
 const Studio = (props) => {
+  const handleChange = (e) => {
+    props.setFileName(e.target.value)
+  }
   return (
     <div>
       <div className="canvas-container">
@@ -38,6 +42,9 @@ const Studio = (props) => {
           addNewDrawing={props.addNewDrawing}
           setNewCoordinates={props.setNewCoordinates}
           coordinates={props.drawState.coordinates}
+          setFileName={props.setFileName}
+          fileName={props.drawState.fileName}
+          handleChange={handleChange}
         />
       </div>
       <DrawingTools />

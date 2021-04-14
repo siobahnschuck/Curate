@@ -2,23 +2,27 @@ const {
   CREATE_DRAWING,
   GET_USER_DRAWING,
   DELETE_DRAWING,
-  ADD_DRAWING,
-  IS_DRAWING
+  IS_DRAWING,
+  ADD_FILENAME,
+  ADD_COORDINATES
 } = require('../types.js')
 
 const iState = {
   drawings: [],
   isDrawing: false, 
-  coordinates: []
+  coordinates: [],
+  fileName: ""
 }
 
 const DrawingReducer = (state= iState, action) => {
   switch (action.type) {
-    case ADD_DRAWING:
+    case ADD_COORDINATES:
       return {
         ...state, 
         coordinates: [...state.coordinates, action.payload]
       }
+    case ADD_FILENAME:
+      return {...state, fileName: action.payload}
     case IS_DRAWING:
       return {...state, isDrawing: action.payload}
     case GET_USER_DRAWING:

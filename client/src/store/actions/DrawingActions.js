@@ -1,3 +1,4 @@
+import crypto from 'crypto'
 import {
   GetDrawings,
   CreateDrawing,
@@ -5,11 +6,12 @@ import {
 } from '../../services/DrawingServices'
 
 import {
-  ADD_DRAWING,
   CREATE_DRAWING,
   GET_USER_DRAWING,
   DELETE_DRAWING,
   IS_DRAWING,
+  ADD_COORDINATES,
+  ADD_FILENAME,
 } from '../types'
 
 export const getDrawings = () => async (dispatch) => {
@@ -48,30 +50,15 @@ export const deleteDrawing = () => async (dispatch) => {
   }
 }
 
-export const addDrawing = (value, fileName, coords) => async (dispatch) =>  {
+export const addDrawing = (value, fileName, coords) => async (dispatch) => {
   try {
-    async function urltoFile(url, filename, mimeType) {
-      // let res = await fetch(url)
-      // let buf = res.arrayBuffer()
-      return new File(Buffer.from(url.replace(/^data:image\/\w+;base64,/, ""),'base64'), `${filename}.png`, { type: mimeType })
-    }
-    let file = await urltoFile(value, fileName, 'image/png')
-    // let file = new File(value, `${fileName}.png`, { type: 'image/png' })
-    // function dataURItoBlob(dataURI) {
-    //   var binary = atob(dataURI.split(',')[1]);
-    //   var array = [];
-    //   for(var i = 0; i < binary.length; i++) {
-    //       array.push(binary.charCodeAt(i));
-    //     }
-    //     return new Blob([new Uint8Array(array)], {type: 'image/png'});
-    //   }
-    // let file = value
-    console.log(file)
+    let backUpFilename = crypto.randomBytes(12).toString('hex')
     const formData = new FormData()
-    formData.append("image", file)
-    formData.append("coordinates", JSON.stringify(coords))
-    formData.append("user_id", 3)
-    formData.append("gallery_id", 2)
+    formData.append('image', value)
+    formData.append('filename', `${fileName || backUpFilename}.png`)
+    formData.append('coordinates', JSON.stringify(coords))
+    formData.append('user_id', 3)
+    formData.append('gallery_id', 2)
     await dispatch(createDrawing(formData))
   } catch (error) {
     throw error
@@ -84,6 +71,11 @@ export const isDrawing = (formValue) => ({
 })
 
 export const setCoordinates = (coordinates) => ({
-  type: ADD_DRAWING,
+  type: ADD_COORDINATES,
   payload: coordinates
+})
+
+export const setFilename = (fileName) => ({
+  type: ADD_FILENAME,
+  payload: fileName
 })

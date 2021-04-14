@@ -17,8 +17,8 @@ class Galleries(Resource):
 
 
 class SingleGallery(Resource):
-    def get(self, gallery_id):
-        pass
+    # def get(self, gallery_id):
+    #     pass
 
     def put(self, gallery_id):
         data = request.get_json()

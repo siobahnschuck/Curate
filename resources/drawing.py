@@ -7,7 +7,6 @@ from models.drawing import Drawing
 from models.db import db
 import base64
 
-
 class Drawings(Resource):
     def get(self):
         drawings = Drawing.find_all()
@@ -16,9 +15,10 @@ class Drawings(Resource):
     def post(self):
         data = request.form.to_dict()
         file = request.files['image']
-        print(file.filename)
-        if file and allowed_file(file.filename):
-            file.filename = secure_filename(file.filename)
+        print(file)
+        filename = data['filename']
+        if file and allowed_file(filename):
+            file.filename = secure_filename(filename)
             uploaded = upload(file)
             drawing = Drawing(
                 data['user_id'], data['gallery_id'], uploaded, data['coordinates'])

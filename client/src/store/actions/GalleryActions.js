@@ -27,9 +27,9 @@ export const getAllGallery = () => async (dispatch) => {
   }
 }
 
-export const getUserGallery = () => async (dispatch) => {
+export const getUserGallery = (id) => async (dispatch) => {
   try {
-    const galleries = await GetUserGallery()
+    const galleries = await GetUserGallery(id)
     dispatch({
       type: GET_USER_GALLERY,
       payload: galleries
@@ -44,7 +44,7 @@ export const createGallery = (body) => async (dispatch) => {
     const newGallery = await CreateGallery(body)
     dispatch({
       type: CREATE_GALLERY,
-      payload: newGallery
+      payload: newGallery,
     })
   } catch (error) {
     throw error
@@ -79,6 +79,6 @@ export const addGallery = (name, value) => ({
   type: ADD_GALLERY,
   payload: {
     name: name, 
-    value, value
+    value: value
   }
 })

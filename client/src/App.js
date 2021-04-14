@@ -26,6 +26,9 @@ function App() {
       <Route path='/profile'
         render={() => (<UserGallery/>)}
       />
+      <Route path='/explore'
+        render={() => (<Explore/>)}
+      />
     </Switch>
     </div>
   );

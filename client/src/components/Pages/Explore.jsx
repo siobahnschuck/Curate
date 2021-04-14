@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import {
+  getAllGallery
+} from '../../store/actions/GalleryActions'
 
+const mapStateToProps = ({ galleryState }) => {
+  return { galleryState }
+}
 
-const Explore = () => {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getAllGalleries: () => dispatch(getAllGallery())
+  }
+}
+
+const Explore = (props) => {
+  useEffect(() => {
+    props.getAllGalleries()
+  }, [])
   return (
     <div>
       Explore page
@@ -9,4 +25,4 @@ const Explore = () => {
   )
 }
 
-export default Explore
+export default connect(mapStateToProps, mapDispatchToProps)(Explore)

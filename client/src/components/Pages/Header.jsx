@@ -18,6 +18,9 @@ const Header = () => {
         <NavLink className="nav-element" to="/studio" style={{ textDecoration: "none", color: "white" }}>
           Studio
         </NavLink>
+        <NavLink className="nav-element" to="/explore" style={{ textDecoration: "none", color: "white" }}>
+          Explore
+        </NavLink>
         <NavLink className="nav-element" to="/profile" style={{ textDecoration: "none", color: "white" }}>
           Profile
         </NavLink>

@@ -63,3 +63,11 @@ class Profile(Resource):
             setattr(profile, key, data[key])
         db.session.commit()
         return profile.json()
+
+
+class GalleryData(Resource):
+    def get(self, user_id):
+        user = User.query.options(
+            joinedload('galleries')).filter_by(id=user_id).first()
+        gallery = [g.json() for g in user.galleries]
+        return {**user.json(), 'galleries': gallery}

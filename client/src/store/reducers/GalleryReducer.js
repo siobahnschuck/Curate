@@ -12,7 +12,7 @@ const iState = {
   allGalleries: [],
   newGallery: {
     exhibition_title: '',
-    description: ''
+    description: '',
   }
 }
 

@@ -10,11 +10,12 @@ export const GetAllGallery = async () => {
   }
 }
 
+
 export const GetUserGallery = async (id) => {
   try {
-    const res = await Client.get(`/gallery/${id}`)
+    const res = await Client.get(`/profile/${id}`)
     console.log(res)
-    return res.data
+    return res.data.galleries
   } catch (error) {
     throw error
   }

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import GalleryForm from '../Forms/galleryForm'
 import ProfileForm from '../Forms/profileForm'
+import GalleryCard from '../gallery/GalleryCard'
 import { connect } from 'react-redux'
 import {
   getAllGallery,
@@ -26,18 +27,20 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const UserGallery = (props) => {
-  // useEffect(() => {
-  //   props.getuserGallery(2)
-  // }, [])
-  const { newGallery } = props.galleryState
+  useEffect(() => {
+    props.getuserGallery(3)
+  }, [])
+
+  const { newGallery, userGalleries } = props.galleryState
   const handleChange = (e) => {
     props.addAGallery(e.target.name, e.target.value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    props.createNewGallery(newGallery)
-    props.addAGallery('', '')
+    let obj = { ...newGallery, user_id: 3 }
+    props.createNewGallery(obj)
+    props.addAGallery('')
   }
   const galleryProps = { handleChange, handleSubmit, newGallery }
   return (
@@ -50,6 +53,11 @@ const UserGallery = (props) => {
       <div>
         <h3>create an exhibition</h3>
         <GalleryForm {...galleryProps} />
+      </div>
+      <div>
+        <GalleryCard
+          userGalleries={userGalleries}
+        />
       </div>
     </div>
   )

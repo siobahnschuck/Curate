@@ -29,6 +29,12 @@ class Drawings(Resource):
 
 
 class SingleDrawing(Resource):
+    def get(self, drawing_id):
+        drawing = Drawing.query.options(joinedload(
+            'user')).filter_by(id=drawing_id).first()
+        user = [u.json() for u in drawings.user]
+        return {**drawing.json(), 'user': user}
+
     def put(self, drawing_id):
         data = request.get_json()
         drawing = Drawing.find_by_PK(drawing_id)

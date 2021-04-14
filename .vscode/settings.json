@@ -3,7 +3,9 @@
     "bcrypt",
     "checkpw",
     "dotenv",
+    "gallery",
     "getenv",
+    "getuser",
     "hashpw"
   ]
 }

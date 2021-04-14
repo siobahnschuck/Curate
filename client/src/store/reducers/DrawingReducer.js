@@ -26,7 +26,7 @@ const DrawingReducer = (state= iState, action) => {
     case IS_DRAWING:
       return {...state, isDrawing: action.payload}
     case GET_USER_DRAWING:
-      return {...state, drawings: [...action.payload]}
+      return {...state, drawings: [...state.drawings, action.payload]}
     case CREATE_DRAWING:
       return {...state}
     case DELETE_DRAWING:

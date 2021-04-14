@@ -2,7 +2,8 @@ import crypto from 'crypto'
 import {
   GetDrawings,
   CreateDrawing,
-  DeleteDrawing
+  DeleteDrawing,
+  GetUserDrawings
 } from '../../services/DrawingServices'
 
 import {
@@ -17,6 +18,18 @@ import {
 export const getDrawings = () => async (dispatch) => {
   try {
     const drawings = await GetDrawings()
+    dispatch({
+      type: GET_USER_DRAWING,
+      payload: drawings
+    })
+  } catch (error) {
+    throw error
+  }
+} 
+
+export const getUserDrawings = (id) => async (dispatch) => {
+  try {
+    const drawings = await GetUserDrawings(id)
     dispatch({
       type: GET_USER_DRAWING,
       payload: drawings

@@ -2,7 +2,6 @@ import React from 'react'
 
 
 const GalleryCard = (props) => {
-  console.log(props.userGalleries)
   return (
     <div>
       gallery card

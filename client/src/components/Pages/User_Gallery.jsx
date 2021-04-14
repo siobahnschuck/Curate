@@ -4,20 +4,22 @@ import ProfileForm from '../Forms/profileForm'
 import GalleryCard from '../gallery/GalleryCard'
 import { connect } from 'react-redux'
 import {
-  getAllGallery,
   getUserGallery,
   createGallery,
   deleteGallery,
   updateGallery,
   addGallery
 } from '../../store/actions/GalleryActions'
+import { getUserDrawings } from '../../store/actions/DrawingActions'
+import DrawingCard from '../drawings/DrawingCard'
 
-const mapStateToProps = ({ galleryState, authState }) => {
-  return { galleryState, authState }
+const mapStateToProps = ({ galleryState, authState, drawState }) => {
+  return { galleryState, authState, drawState }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchUserDrawings: (id) => dispatch(getUserDrawings(id)),
     getuserGallery: (id) => dispatch(getUserGallery(id)),
     createNewGallery: (body) => dispatch(createGallery(body)),
     deleteAGallery: (id) => dispatch(deleteGallery(id)),
@@ -29,9 +31,11 @@ const mapDispatchToProps = (dispatch) => {
 const UserGallery = (props) => {
   useEffect(() => {
     props.getuserGallery(3)
+    props.fetchUserDrawings(3)
   }, [])
 
   const { newGallery, userGalleries } = props.galleryState
+  const { drawings } = props.drawState
   const handleChange = (e) => {
     props.addAGallery(e.target.name, e.target.value)
   }
@@ -57,6 +61,12 @@ const UserGallery = (props) => {
       <div>
         <GalleryCard
           userGalleries={userGalleries}
+        />
+      </div>
+      <div>
+        <h3>My drawings</h3>
+        <DrawingCard
+          drawings={drawings}
         />
       </div>
     </div>

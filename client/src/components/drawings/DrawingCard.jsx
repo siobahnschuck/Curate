@@ -5,12 +5,12 @@ import '../../css/Profile.css'
 const DrawingCard = (props) => {
   return (
     <div>
-      Drawing Cards...
       <div>
         {props.drawings.length ? props.drawings[0].map((drawing) => (
-          <div>
+          <div key={drawing.id}>
             <img className="drawing" src={drawing.image} alt="drawing" />
             <button>+</button>
+            <button onClick={() => props.deleteADrawing(drawing.filename, drawing.id)}>-</button>
           </div>
         )) : null}
       </div>

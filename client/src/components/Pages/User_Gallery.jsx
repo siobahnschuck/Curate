@@ -1,8 +1,10 @@
+import '../../css/Profile.css'
 import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import GalleryForm from '../Forms/galleryForm'
 import ProfileForm from '../Forms/profileForm'
 import GalleryCard from '../gallery/GalleryCard'
-import { connect } from 'react-redux'
+import DrawingCard from '../drawings/DrawingCard'
 import {
   getUserGallery,
   createGallery,
@@ -10,8 +12,10 @@ import {
   updateGallery,
   addGallery
 } from '../../store/actions/GalleryActions'
-import { getUserDrawings } from '../../store/actions/DrawingActions'
-import DrawingCard from '../drawings/DrawingCard'
+import {
+  getUserDrawings,
+  deleteDrawing
+} from '../../store/actions/DrawingActions'
 
 const mapStateToProps = ({ galleryState, authState, drawState }) => {
   return { galleryState, authState, drawState }
@@ -20,6 +24,7 @@ const mapStateToProps = ({ galleryState, authState, drawState }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchUserDrawings: (id) => dispatch(getUserDrawings(id)),
+    deleteADrawing: (filename, id) => dispatch(deleteDrawing(filename, id)),
     getuserGallery: (id) => dispatch(getUserGallery(id)),
     createNewGallery: (body) => dispatch(createGallery(body)),
     deleteAGallery: (id) => dispatch(deleteGallery(id)),
@@ -46,11 +51,16 @@ const UserGallery = (props) => {
     props.createNewGallery(obj)
     props.addAGallery('')
   }
+
+  const handleEdit = (id) => {
+    props.updateGallery(id)
+  }
+  
   const galleryProps = { handleChange, handleSubmit, newGallery }
   return (
     <div>
       Profile
-      <div>
+      <div >
         <h3>Edit ur profile</h3>
         <ProfileForm />
       </div>
@@ -61,12 +71,14 @@ const UserGallery = (props) => {
       <div>
         <GalleryCard
           userGalleries={userGalleries}
+          deleteAGallery={props.deleteAGallery}
         />
       </div>
-      <div>
+      <div className="draw-card-con">
         <h3>My drawings</h3>
         <DrawingCard
           drawings={drawings}
+          deleteADrawing={props.deleteADrawing}
         />
       </div>
     </div>

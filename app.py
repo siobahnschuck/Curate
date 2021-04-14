@@ -6,7 +6,7 @@ from models.user import User
 from models.drawing import Drawing
 from models.gallery import Gallery
 from resources.auth import Login, Register, Profile, GalleryData
-from resources.drawing import Drawings, SingleDrawing
+from resources.drawing import Drawings, SingleDrawing, DeleteDrawing
 from resources.gallery import Galleries, SingleGallery
 from flask_cors import CORS
 
@@ -29,6 +29,7 @@ api.add_resource(Profile, '/auth/profile/<int:user_id>')
 api.add_resource(GalleryData, '/profile/<int:user_id>')
 api.add_resource(Drawings, '/drawings')
 api.add_resource(SingleDrawing, '/drawings/<int:drawing_id>')
+api.add_resource(DeleteDrawing, '/drawings/delete/<string:filename>/<int:id>')
 api.add_resource(Galleries, '/gallery')
 api.add_resource(SingleGallery, '/gallery/<int:gallery_id>')
 

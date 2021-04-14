@@ -56,7 +56,8 @@ const Canvas = (props) => {
     }
     return new Blob([ba], { type: "image/png" });
   }
-  const saveDrawing = async () => {
+  const saveDrawing = async (e) => {
+    e.preventDefault()
     const save = canvasRef.current.toDataURL('image/png')
     let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
     await props.addNewDrawing(blob, props.fileName, props.coordinates)
@@ -75,7 +76,7 @@ const Canvas = (props) => {
         ref={canvasRef}
       />
       <button onClick={clearDrawing}>clear from canvas</button>
-      <form>
+      <form onSubmit={saveDrawing}>
         <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
         <button onClick={saveDrawing}>save from canvas</button>
       </form>

@@ -51,9 +51,9 @@ export const createDrawing = (body) => async (dispatch) => {
   }
 }
 
-export const deleteDrawing = () => async (dispatch) => {
+export const deleteDrawing = (filename, id) => async (dispatch) => {
   try {
-    const deleted = await DeleteDrawing()
+    const deleted = await DeleteDrawing(filename, id)
     dispatch({
       type: DELETE_DRAWING,
       payload: deleted

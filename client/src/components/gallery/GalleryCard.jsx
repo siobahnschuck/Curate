@@ -10,6 +10,7 @@ const GalleryCard = (props) => {
           <div key={gallery.id}>
             <h1>{gallery.exhibition_title}</h1>
             <p>{gallery.description}</p>
+            <button onClick={() => props.deleteAGallery(gallery.id)}>-</button>
           </div>
         ))
         : null}

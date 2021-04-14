@@ -14,8 +14,13 @@ import {
 } from '../../store/actions/GalleryActions'
 import {
   getUserDrawings,
-  deleteDrawing
+  deleteDrawing,
+  updateDrawing
 } from '../../store/actions/DrawingActions'
+import {
+  addUser,
+  updateProfile
+} from '../../store/actions/AuthActions'
 
 const mapStateToProps = ({ galleryState, authState, drawState }) => {
   return { galleryState, authState, drawState }
@@ -25,26 +30,30 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchUserDrawings: (id) => dispatch(getUserDrawings(id)),
     deleteADrawing: (filename, id) => dispatch(deleteDrawing(filename, id)),
+    updateADrawing: (id) => dispatch(updateDrawing(id)),
+
     getuserGallery: (id) => dispatch(getUserGallery(id)),
     createNewGallery: (body) => dispatch(createGallery(body)),
     deleteAGallery: (id) => dispatch(deleteGallery(id)),
     updateGallery: (id) => dispatch(updateGallery(id)),
-    addAGallery: (name, value) => dispatch(addGallery(name, value))
+    addAGallery: (name, value) => dispatch(addGallery(name, value)),
+
+    updateAProfile: (id, body) => dispatch(updateProfile(id, body)),
+    addNewUser: (name, value) => dispatch(addUser(name, value))
   }
 }
 
 const UserGallery = (props) => {
+  const { newGallery, userGalleries } = props.galleryState
+  const { drawings } = props.drawState
   useEffect(() => {
     props.getuserGallery(3)
     props.fetchUserDrawings(3)
   }, [])
 
-  const { newGallery, userGalleries } = props.galleryState
-  const { drawings } = props.drawState
   const handleChange = (e) => {
     props.addAGallery(e.target.name, e.target.value)
   }
-
   const handleSubmit = (e) => {
     e.preventDefault()
     let obj = { ...newGallery, user_id: 3 }
@@ -52,17 +61,34 @@ const UserGallery = (props) => {
     props.addAGallery('')
   }
 
+  const handleProfileChange = (e) => {
+    props.addNewUser(e.target.name, e.target.value)
+  }
+
+  const handleProfileSubmit = (e) => {
+    e.preventDefault()
+    props.updateAProfile(3, props.authState.registerForm)
+  }
+
   const handleEdit = (id) => {
     props.updateGallery(id)
   }
-  
+
+  const handleAdd = (id) => {
+
+  }
+
   const galleryProps = { handleChange, handleSubmit, newGallery }
   return (
     <div>
       Profile
       <div >
         <h3>Edit ur profile</h3>
-        <ProfileForm />
+        <ProfileForm
+          handleProfileChange={handleProfileChange}
+          registerForm={props.authState.registerForm}
+          handleProfileSubmit={handleProfileSubmit}
+        />
       </div>
       <div>
         <h3>create an exhibition</h3>
@@ -79,6 +105,7 @@ const UserGallery = (props) => {
         <DrawingCard
           drawings={drawings}
           deleteADrawing={props.deleteADrawing}
+          updateADrawing={props.updateADrawing}
         />
       </div>
     </div>

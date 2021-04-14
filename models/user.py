@@ -38,3 +38,8 @@ class User(db.Model):
     def find_one(cls, email):
         user = User.query.filter_by(email=email).first()
         return user
+
+    @classmethod
+    def find_by_PK(cls, user_id):
+        user = User.query.filter_by(id=user_id).first()
+        return user

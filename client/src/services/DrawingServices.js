@@ -35,3 +35,13 @@ export const DeleteDrawing = async (filename, id) => {
     throw error
   }
 }
+
+export const UpdateDrawing = async (id) => {
+  try {
+    const res = await Client.put(`/drawings/${id}`)
+    console.log(res)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

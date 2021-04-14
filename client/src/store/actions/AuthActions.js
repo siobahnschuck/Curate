@@ -68,9 +68,9 @@ export const deleteProfile = () => async (dispatch) => {
   }
 }
 
-export const updateProfile = () => async (dispatch) => {
+export const updateProfile = (id, body) => async (dispatch) => {
   try {
-    const updated = await UpdateProfile()
+    const updated = await UpdateProfile(id, body)
     dispatch({
       type: UPDATE_PROFILE,
       payload: updated

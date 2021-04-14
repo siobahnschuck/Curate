@@ -25,7 +25,7 @@ class Drawing(db.Model):
 
     def __init__(self, user_id, gallery_id, image, coordinates, filename):
         self.user_id = user_id
-        self.gallery_id = gallery_id
+        self.gallery_id = gallery_id or None
         self.image = image or None
         self.coordinates = coordinates
         self.filename = filename

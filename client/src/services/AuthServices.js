@@ -17,9 +17,9 @@ export const DeleteProfile = async (id) => {
   }
 }
 
-export const UpdateProfile = async (id) => {
+export const UpdateProfile = async (id, body) => {
   try {
-    const res = await Client.put(`/auth/profile/${id}`)
+    const res = await Client.put(`/auth/profile/${id}`, body)
   } catch (error) {
     throw error
   }

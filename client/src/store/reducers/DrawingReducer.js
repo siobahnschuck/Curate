@@ -4,7 +4,8 @@ const {
   DELETE_DRAWING,
   IS_DRAWING,
   ADD_FILENAME,
-  ADD_COORDINATES
+  ADD_COORDINATES,
+  UPDATE_DRAWING
 } = require('../types.js')
 
 const iState = {
@@ -30,6 +31,8 @@ const DrawingReducer = (state= iState, action) => {
     case CREATE_DRAWING:
       return {...state}
     case DELETE_DRAWING:
+      return {...state}
+    case UPDATE_DRAWING:
       return {...state}
     default:
       return {...state}

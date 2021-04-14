@@ -49,7 +49,10 @@ const AuthReducer = (state=iState, action) => {
     case UPDATE_PROFILE:
       return {
         ...state,
-        registerForm: {...state.registerForm}
+        registerForm: {
+          ...state.registerForm,
+          [action.payload.name]: action.payload.value
+        }
       }
     case DELETE_PROFILE:
       return {...state}

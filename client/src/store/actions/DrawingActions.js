@@ -3,7 +3,8 @@ import {
   GetDrawings,
   CreateDrawing,
   DeleteDrawing,
-  GetUserDrawings
+  GetUserDrawings,
+  UpdateDrawing
 } from '../../services/DrawingServices'
 
 import {
@@ -13,6 +14,7 @@ import {
   IS_DRAWING,
   ADD_COORDINATES,
   ADD_FILENAME,
+  UPDATE_DRAWING,
 } from '../types'
 
 export const getDrawings = () => async (dispatch) => {
@@ -45,6 +47,18 @@ export const createDrawing = (body) => async (dispatch) => {
     dispatch({
       type: CREATE_DRAWING,
       payload: newDrawing
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+export const updateDrawing = (id) => async (dispatch) => {
+  try {
+    const updated = await UpdateDrawing(id)
+    dispatch({
+      type: UPDATE_DRAWING,
+      payload: updated
     })
   } catch (error) {
     throw error
@@ -92,3 +106,4 @@ export const setFilename = (fileName) => ({
   type: ADD_FILENAME,
   payload: fileName
 })
+

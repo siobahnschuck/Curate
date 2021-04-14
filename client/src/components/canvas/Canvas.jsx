@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import '../../css/Canvas.css'
 
 const Canvas = (props) => {
 
@@ -58,12 +59,13 @@ const Canvas = (props) => {
   const saveDrawing = async () => {
     const save = canvasRef.current.toDataURL('image/png')
     let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
-    await props.addNewDrawing(blob, 'tryAgain', props.coordinates)
+    await props.addNewDrawing(blob, props.fileName, props.coordinates)
   }
 
   return (
     <div>
       <canvas
+        className="canvas"
         height={window.innerHeight * 2}
         width={window.innerWidth * 2}
         style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px` }}

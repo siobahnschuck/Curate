@@ -17,7 +17,7 @@ const mapStateToProps = ({ galleryState, authState }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getuserGallery: () => dispatch(getUserGallery()),
+    getuserGallery: (id) => dispatch(getUserGallery(id)),
     createNewGallery: (body) => dispatch(createGallery(body)),
     deleteAGallery: (id) => dispatch(deleteGallery(id)),
     updateGallery: (id) => dispatch(updateGallery(id)),
@@ -25,12 +25,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
-
 const UserGallery = (props) => {
-  console.log(props)
   // useEffect(() => {
-  //   getuserGallery()
+  //   props.getuserGallery(2)
   // }, [])
   const { newGallery } = props.galleryState
   const handleChange = (e) => {

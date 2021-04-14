@@ -6,6 +6,8 @@ from aws import upload
 from models.drawing import Drawing
 from models.db import db
 import base64
+from sqlalchemy.orm import joinedload
+
 
 class Drawings(Resource):
     def get(self):

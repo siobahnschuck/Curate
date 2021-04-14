@@ -2,6 +2,7 @@ from flask import request
 from flask_restful import Resource
 from models.gallery import Gallery
 from models.db import db
+from sqlalchemy.orm import joinedload
 
 
 class Galleries(Resource):
@@ -17,8 +18,11 @@ class Galleries(Resource):
 
 
 class SingleGallery(Resource):
-    # def get(self, gallery_id):
-    #     pass
+    def get(self, gallery_id):
+        gallery = Gallery.query.options(
+            joinedload('drawings')).filter_by(id=gallery_id).first()
+        drawings = [d.json() for d in gallery.drawings]
+        return {**gallery.json(), 'drawings': drawings}
 
     def put(self, gallery_id):
         data = request.get_json()

@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request
 from models.user import User
 from middleware import create_token, gen_password, strip_token, read_token, compare_password
+from sqlalchemy.orm import joinedload
 
 
 class Login(Resource):
@@ -41,6 +42,12 @@ class Register(Resource):
 
 
 class Profile(Resource):
+    def get(self, user_id):
+        user = User.query.options(
+            joinedload('drawings')).filter_by(id=user_id).first()
+        drawing = [d.json() for d in user.drawings]
+        return {**user.json(), 'drawings': drawing}
+
     def delete(self, user_id):
         profile = User.find_by_PK(user_id)
         if not profile:

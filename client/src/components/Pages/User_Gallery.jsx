@@ -21,6 +21,7 @@ import {
   addUser,
   updateProfile
 } from '../../store/actions/AuthActions'
+import ProfileCard from '../profile/ProfileCard'
 
 const mapStateToProps = ({ galleryState, authState, drawState }) => {
   return { galleryState, authState, drawState }
@@ -83,6 +84,9 @@ const UserGallery = (props) => {
     <div>
       Profile
       <div >
+        <ProfileCard
+        // load in current user state and map through
+        />
         <h3>Edit ur profile</h3>
         <ProfileForm
           handleProfileChange={handleProfileChange}

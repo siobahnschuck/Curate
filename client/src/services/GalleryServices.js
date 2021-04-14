@@ -20,6 +20,15 @@ export const GetUserGallery = async (id) => {
   }
 }
 
+export const GetGalleryDrawings = async (id) => {
+  try {
+    const res = await Client.get(`/gallery/${id}`)
+    return res.data.drawings
+  } catch (error) {
+    throw error
+  }
+}
+
 export const CreateGallery = async (body) => {
   try {
     const res = await Client.post('/gallery', body)

@@ -4,7 +4,8 @@ const {
   GET_ALL_GALLERY,
   GET_USER_GALLERY,
   UPDATE_GALLERY,
-  DELETE_GALLERY
+  DELETE_GALLERY,
+  GET_GALLERY_DRAWINGS
 } = require('../types')
 
 const iState = {
@@ -13,7 +14,8 @@ const iState = {
   newGallery: {
     exhibition_title: '',
     description: '',
-  }
+  },
+  galleryDrawings: []
 }
 
 const GalleryReducer = (state=iState, action) => {
@@ -32,6 +34,8 @@ const GalleryReducer = (state=iState, action) => {
       return {...state, userGalleries: [action.payload]}
     case GET_ALL_GALLERY:
       return {...state, allGalleries: [action.payload]}
+    case GET_GALLERY_DRAWINGS:
+      return {...state, galleryDrawings: [...state.galleryDrawings, action.payload]}
     case DELETE_GALLERY:
       return {...state}
     case UPDATE_GALLERY:

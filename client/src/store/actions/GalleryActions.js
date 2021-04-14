@@ -4,6 +4,7 @@ import {
   CreateGallery,
   DeleteGallery,
   UpdateGallery,
+  GetGalleryDrawings
 } from '../../services/GalleryServices'
 
 import {
@@ -12,7 +13,8 @@ import {
   GET_ALL_GALLERY,
   GET_USER_GALLERY,
   UPDATE_GALLERY,
-  DELETE_GALLERY
+  DELETE_GALLERY,
+  GET_GALLERY_DRAWINGS
 } from '../types'
 
 export const getAllGallery = () => async (dispatch) => {
@@ -33,6 +35,18 @@ export const getUserGallery = (id) => async (dispatch) => {
     dispatch({
       type: GET_USER_GALLERY,
       payload: galleries
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getGalleryDrawings = (id) => async (dispatch) => {
+  try {
+    const drawings = await GetGalleryDrawings(id)
+    dispatch({
+      type: GET_GALLERY_DRAWINGS,
+      payload: drawings
     })
   } catch (error) {
     throw error

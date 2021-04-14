@@ -10,7 +10,8 @@ import {
   createGallery,
   deleteGallery,
   updateGallery,
-  addGallery
+  addGallery,
+  getGalleryDrawings
 } from '../../store/actions/GalleryActions'
 import {
   getUserDrawings,
@@ -38,6 +39,7 @@ const mapDispatchToProps = (dispatch) => {
     deleteAGallery: (id) => dispatch(deleteGallery(id)),
     updateGallery: (id) => dispatch(updateGallery(id)),
     addAGallery: (name, value) => dispatch(addGallery(name, value)),
+    getDrawings: (id) => dispatch(getGalleryDrawings(id)),
 
     updateAProfile: (id, body) => dispatch(updateProfile(id, body)),
     addNewUser: (name, value) => dispatch(addUser(name, value))
@@ -102,6 +104,7 @@ const UserGallery = (props) => {
         <GalleryCard
           userGalleries={userGalleries}
           deleteAGallery={props.deleteAGallery}
+          getDrawings={props.getDrawings}
         />
       </div>
       <div className="draw-card-con">

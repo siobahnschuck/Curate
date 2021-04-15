@@ -34,7 +34,7 @@ const Studio = (props) => {
     props.setFileName(e.target.value)
   }
   return (
-    <div>
+    <div className='studio'>
       <div className="canvas-container">
         <Canvas
           isDrawing={props.drawState.isDrawing}

@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const UserGallery = (props) => {
-  const { newGallery, userGalleries } = props.galleryState
+  const { newGallery, userGalleries, galleryDrawings } = props.galleryState
   const { drawings } = props.drawState
   useEffect(() => {
     props.getuserGallery(3)
@@ -83,7 +83,7 @@ const UserGallery = (props) => {
 
   const galleryProps = { handleChange, handleSubmit, newGallery }
   return (
-    <div>
+    <div className="profile">
       Profile
       <div >
         <ProfileCard
@@ -105,6 +105,7 @@ const UserGallery = (props) => {
           userGalleries={userGalleries}
           deleteAGallery={props.deleteAGallery}
           getDrawings={props.getDrawings}
+          galleryDrawings={galleryDrawings}
         />
       </div>
       <div className="draw-card-con">

@@ -21,6 +21,7 @@ const Explore = (props) => {
     props.getAllGalleries()
   }, [])
   return (
+    <div className="explore">
     <div className="explore-container">
       Explore page
       <div className="ex-gall-card">
@@ -31,6 +32,7 @@ const Explore = (props) => {
           </div>
         )) : null}
       </div>
+    </div>
     </div>
   )
 }

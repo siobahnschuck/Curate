@@ -5,12 +5,13 @@ import Home from './components/Pages/Home'
 import Studio from './components/Pages/Studio'
 import Explore from './components/Pages/Explore'
 import UserGallery from './components/Pages/User_Gallery';
-
+import Navbar from './components/navbar/Navbar';
 
 function App() {
   return (
     <div className="App"> 
-    <Header/> 
+    <Header/>
+    {/* <Navbar />  */}
     <Switch>
       <Route exact path='/' 
         render={() => (

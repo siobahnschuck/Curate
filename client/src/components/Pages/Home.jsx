@@ -33,7 +33,7 @@ const Home = (props) => {
 
   const registerProps = { handleChange, handleSubmit, registerForm }
   return (
-    <div>
+    <div className="home">
       <h1>HOME PAGE BODY</h1>
       <RegisterForm {...registerProps} />
     </div>

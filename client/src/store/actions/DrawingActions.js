@@ -17,6 +17,7 @@ import {
   ADD_FILENAME,
   UPDATE_DRAWING,
   SELECTED_DRAWING,
+  NEW_GALLERY,
 } from '../types'
 
 //GET METHODS
@@ -72,9 +73,9 @@ export const createDrawing = (body) => async (dispatch) => {
 
 //PUT METHODS
 
-export const updateDrawing = (id) => async (dispatch) => {
+export const updateDrawing = (id, update) => async (dispatch) => {
   try {
-    const updated = await UpdateDrawing(id)
+    const updated = await UpdateDrawing(id, update)
     dispatch({
       type: UPDATE_DRAWING,
       payload: updated
@@ -126,5 +127,10 @@ export const setCoordinates = (coordinates) => ({
 export const setFilename = (fileName) => ({
   type: ADD_FILENAME,
   payload: fileName
+})
+
+export const setGalleryId = (value) => ({
+  type: NEW_GALLERY,
+  payload: value
 })
 

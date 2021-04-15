@@ -1,24 +1,23 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 
 const GalleryCard = (props) => {
-
+  const history = useHistory()
   const handleSubmit = (e, id) => {
     e.preventDefault()
     props.getDrawings(id)
+    history.push(`gallery/details/${id}`)
   }
   return (
-    <div >
-      gallery card
+    <div className="gallery-card" >
+      <h2 className="gallery-section-title">Galleries</h2>
       {props.userGalleries.length ?
         props.userGalleries[0].map((gallery) => (
-          <div key={gallery.id}>
-            <h1>{gallery.exhibition_title}</h1>
+          <div className="individual-gallery" key={gallery.id}>
+            <h3>{gallery.exhibition_title}</h3>
             <p>{gallery.description}</p>
             <button onClick={(e) => handleSubmit(e, gallery.id)}
             >view drawings</button>
-            {props.galleryDrawings.length ? props.galleryDrawings[0].map((draw) => (
-              <img className="gallery-drawing" src={draw.image} alt="gallery-drawing" />
-            )) : null}
             <button onClick={() => props.deleteAGallery(gallery.id)}>-</button>
           </div>
         ))

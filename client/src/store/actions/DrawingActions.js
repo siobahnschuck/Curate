@@ -4,7 +4,8 @@ import {
   CreateDrawing,
   DeleteDrawing,
   GetUserDrawings,
-  UpdateDrawing
+  UpdateDrawing,
+  GetDrawingById
 } from '../../services/DrawingServices'
 
 import {
@@ -15,7 +16,10 @@ import {
   ADD_COORDINATES,
   ADD_FILENAME,
   UPDATE_DRAWING,
+  SELECTED_DRAWING,
 } from '../types'
+
+//GET METHODS
 
 export const getDrawings = () => async (dispatch) => {
   try {
@@ -41,6 +45,19 @@ export const getUserDrawings = (id) => async (dispatch) => {
   }
 } 
 
+export const getDrawingById = (id) => async (dispatch) => {
+  try {
+    const drawing = await GetDrawingById(id)
+    dispatch({
+      type: SELECTED_DRAWING,
+      payload: drawing
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+//POST METHODS
 export const createDrawing = (body) => async (dispatch) => {
   try {
     const newDrawing = await CreateDrawing(body)
@@ -53,6 +70,8 @@ export const createDrawing = (body) => async (dispatch) => {
   }
 }
 
+//PUT METHODS
+
 export const updateDrawing = (id) => async (dispatch) => {
   try {
     const updated = await UpdateDrawing(id)
@@ -64,6 +83,8 @@ export const updateDrawing = (id) => async (dispatch) => {
     throw error
   }
 }
+
+//DELETE METHODS
 
 export const deleteDrawing = (filename, id) => async (dispatch) => {
   try {
@@ -85,7 +106,7 @@ export const addDrawing = (value, fileName, coords) => async (dispatch) => {
     formData.append('filename', `${fileName || backUpFilename}.png`)
     formData.append('coordinates', JSON.stringify(coords))
     formData.append('user_id', 3)
-    formData.append('gallery_id', 2)
+    formData.append('gallery_id', 4)
     await dispatch(createDrawing(formData))
   } catch (error) {
     throw error

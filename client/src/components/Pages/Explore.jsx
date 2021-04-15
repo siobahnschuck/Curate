@@ -3,8 +3,11 @@ import '../../css/Explore.css'
 import { connect } from 'react-redux'
 import GalleryCard from '../gallery/GalleryCard'
 import {
-  getAllGallery
+  getAllGallery, getGalleryDrawings
 } from '../../store/actions/GalleryActions'
+import ExploreGallery from '../gallery/ExploreGallery'
+import { getDrawings } from '../../store/actions/DrawingActions'
+import { useHistory } from 'react-router'
 
 const mapStateToProps = ({ galleryState }) => {
   return { galleryState }
@@ -12,27 +15,28 @@ const mapStateToProps = ({ galleryState }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getAllGalleries: () => dispatch(getAllGallery())
+    getAllGalleries: () => dispatch(getAllGallery()),
+    getDrawings: (id) => dispatch(getGalleryDrawings(id))
   }
 }
 
 const Explore = (props) => {
+  const history = useHistory()
   useEffect(() => {
     props.getAllGalleries()
   }, [])
+
+  const handleExpand = (id) => {
+    history.push(`/gallery/details/${id}`)
+    getDrawings(id)
+  }
+
   return (
     <div className="explore">
-    <div className="explore-container">
-      Explore page
-      <div className="ex-gall-card">
-        {props.galleryState.allGalleries.length ? props.galleryState.allGalleries[0].map((gallery) => (
-          <div className="card">
-            <h1>{gallery.exhibition_title}</h1>
-            <p>{gallery.description}</p>
-          </div>
-        )) : null}
-      </div>
-    </div>
+      <ExploreGallery
+        allGalleries={props.galleryState.allGalleries}
+        handleExpand={handleExpand}
+      />
     </div>
   )
 }

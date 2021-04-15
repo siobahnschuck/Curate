@@ -56,3 +56,9 @@ class DeleteDrawing(Resource):
         db.session.delete(drawing_id)
         db.session.commit()
         return {"msg": "Drawing Deleted", "payload": id}
+
+
+class DrawingDetails(Resource):
+    def get(self, drawing_id):
+        drawing = Drawing.find_by_PK(drawing_id)
+        return drawing.json(), 201

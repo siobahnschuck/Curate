@@ -45,3 +45,13 @@ export const UpdateDrawing = async (id) => {
     throw error
   }
 }
+
+export const GetDrawingById = async (id) => {
+  try {
+    const res = await Client.get(`/drawings/get/${id}`)
+    console.log(res)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

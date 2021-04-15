@@ -5,7 +5,7 @@ const RegisterForm = (props) => {
   return (
     <div className="register-container">
       <p>create an account</p>
-      <form>
+      <form onSubmit={(e) => props.handleSubmit(e)}>
         <input
           type="text"
           name="username"
@@ -54,7 +54,7 @@ const RegisterForm = (props) => {
           onChange={(e) => props.handleChange(e)}
           required
         />
-        <button onClick={props.handleSubmit}>Sign Up</button>
+        <button>Sign Up</button>
       </form>
     </div>
   )

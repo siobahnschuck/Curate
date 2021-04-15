@@ -3,6 +3,7 @@ import {
   DeleteProfile,
   Register,
   UpdateProfile,
+  GetLogin
 } from '../../services/AuthServices'
 
 import {
@@ -12,6 +13,9 @@ import {
   DELETE_PROFILE,
   ADD_USER,
   ADD_LOGIN,
+  CHECK_SESSION,
+  SET_AUTHENTICATED,
+  SESSION
 } from '../types'
 
 
@@ -29,6 +33,16 @@ export const addLogin = (name, value) => ({
     name: name,
     value: value
   }
+})
+
+export const setAuthenticated = (value) => ({
+  type: SET_AUTHENTICATED,
+  payload: value
+})
+
+export const checkSession = (value) => ({
+  type: CHECK_SESSION,
+  payload: value
 })
 
 
@@ -74,6 +88,18 @@ export const updateProfile = (id, body) => async (dispatch) => {
     dispatch({
       type: UPDATE_PROFILE,
       payload: updated
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+export const verifySession = () => async (dispatch) => {
+  try {
+    const verified = await GetLogin()
+    dispatch({
+      type: SESSION,
+      payload: verified
     })
   } catch (error) {
     throw error

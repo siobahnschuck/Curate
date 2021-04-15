@@ -4,7 +4,10 @@ const {
   UPDATE_PROFILE, 
   DELETE_PROFILE,
   ADD_USER,
-  ADD_LOGIN
+  ADD_LOGIN,
+  CHECK_SESSION,
+  SET_AUTHENTICATED, 
+  SESSION,
 } = require('../types.js')
 
 const iState = {
@@ -46,6 +49,12 @@ const AuthReducer = (state=iState, action) => {
       return {...state}
     case LOGIN:
       return {...state}
+    case SESSION:
+      return {...state}
+    case CHECK_SESSION:
+      return {...state, currentUser: action.payload}
+    case SET_AUTHENTICATED:
+      return {...state, authenticated: action.payload}
     case UPDATE_PROFILE:
       return {
         ...state,

@@ -1,41 +1,63 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { addUser, updateProfile } from '../../store/actions/AuthActions'
 
-const Profile = (props) => {
+const mapStateToProps = ({ authState }) => {
+  return { authState }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateAProfile: (id, body) => dispatch(updateProfile(id, body)),
+    addNewUser: (name, value) => dispatch(addUser(name, value))
+  }
+}
+
+const ProfileForm = (props) => {
+  const { registerForm } = props.authState
+  const handleProfileChange = (e) => {
+    props.addNewUser(e.target.name, e.target.value)
+  }
+
+  const handleProfileSubmit = (e) => {
+    e.preventDefault()
+    props.updateAProfile(3, registerForm)
+  }
   return (
     <div>
-      <form onSubmit={(e) => props.handleProfileSubmit(e)}>
+      <form onSubmit={(e) => handleProfileSubmit(e)}>
         <input
           type="text"
           name="username"
           placeholder="username"
-          value={props.registerForm.username}
-          onChange={(e) => props.handleProfileChange(e)}
+          value={registerForm.username}
+          onChange={(e) => handleProfileChange(e)}
         />
         <input
           type="text"
           name="email"
           placeholder="email"
-          value={props.registerForm.email}
-          onChange={(e) => props.handleProfileChange(e)}
+          value={registerForm.email}
+          onChange={(e) => handleProfileChange(e)}
         />
         <input
           type="text"
           name="bio"
           placeholder="bio"
-          value={props.registerForm.bio}
-          onChange={(e) => props.handleProfileChange(e)}
+          value={registerForm.bio}
+          onChange={(e) => handleProfileChange(e)}
         />
         <input
           type="text"
           name="location"
           placeholder="location"
-          value={props.registerForm.location}
-          onChange={(e) => props.handleProfileChange(e)}
+          value={registerForm.location}
+          onChange={(e) => handleProfileChange(e)}
         />
-        <button onClick={(e) => props.handleProfileSubmit(e)}>Submit</button>
+        <button onClick={(e) => handleProfileSubmit(e)}>Submit</button>
       </form>
     </div>
   )
 }
 
-export default Profile
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm)

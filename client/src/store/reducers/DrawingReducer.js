@@ -5,14 +5,18 @@ const {
   IS_DRAWING,
   ADD_FILENAME,
   ADD_COORDINATES,
-  UPDATE_DRAWING
+  UPDATE_DRAWING,
+  IS_COVER,
+  SELECTED_DRAWING
 } = require('../types.js')
 
 const iState = {
   drawings: [],
+  selectedDrawing: [],
   isDrawing: false, 
   coordinates: [],
-  fileName: ""
+  fileName: "", 
+  isCover: false
 }
 
 const DrawingReducer = (state= iState, action) => {
@@ -22,10 +26,14 @@ const DrawingReducer = (state= iState, action) => {
         ...state, 
         coordinates: [...state.coordinates, action.payload]
       }
+    case SELECTED_DRAWING:
+      return {...state, selectedDrawing: action.payload}
     case ADD_FILENAME:
       return {...state, fileName: action.payload}
     case IS_DRAWING:
       return {...state, isDrawing: action.payload}
+    case IS_COVER:
+      return {...state, isCover: action.payload}
     case GET_USER_DRAWING:
       return {...state, drawings: [...state.drawings, action.payload]}
     case CREATE_DRAWING:

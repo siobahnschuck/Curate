@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Alert, Button } from 'react-bootstrap'
 import '../../css/Canvas.css'
 
 const Canvas = (props) => {
-
+  const [show, setShow] = useState(false)
   const canvasRef = useRef(null)
   const contextRef = useRef(null)
 
@@ -61,6 +62,7 @@ const Canvas = (props) => {
     const save = canvasRef.current.toDataURL('image/png')
     let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
     await props.addNewDrawing(blob, props.fileName, props.coordinates)
+    await setShow(true)
   }
 
   return (
@@ -75,11 +77,21 @@ const Canvas = (props) => {
         onMouseMove={draw}
         ref={canvasRef}
       />
-      <button onClick={clearDrawing}>clear from canvas</button>
-      <form onSubmit={saveDrawing}>
-        <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
-        <button onClick={saveDrawing}>save from canvas</button>
-      </form>
+      <div>
+        <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
+        <form onSubmit={saveDrawing}>
+          <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
+          {!show && <Button size="sm" variant="outline-info" onClick={saveDrawing}>save</Button>}
+        </form>
+        <Alert show={show} variant="success">
+          <Alert.Heading>Drawing Saved</Alert.Heading>
+          <p>Go to your profile to see all your drawings and move them to galleries</p>
+          <div className="d-flex justify-content-end">
+            <Button onClick={() => setShow(false)} variant="outline-success"> close </Button>
+          </div>
+        </Alert>
+        <div />
+      </div>
     </div>
   )
 }

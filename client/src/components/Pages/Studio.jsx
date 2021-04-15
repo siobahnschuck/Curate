@@ -47,7 +47,6 @@ const Studio = (props) => {
           handleChange={handleChange}
         />
       </div>
-      <DrawingTools />
     </div>
   )
 }

@@ -4,8 +4,12 @@
   padding:0;
 } */ 
 
-
 .home, .studio, .explore, .profile {
   height: 100vh;
   text-align: center;
 } 
+
+body .bg-dark {
+  background-color: cadetblue!important;
+  color: black;
+}

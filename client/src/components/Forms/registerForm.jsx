@@ -1,12 +1,16 @@
 import React from 'react'
-import '../../css/Form.css'
+import { Button } from 'react-bootstrap'
+// import '../../css/Form.css'
+import '../../css/Home.css'
+
 
 const RegisterForm = (props) => {
   return (
-    <div className="register-container">
+    <div className="home-register-form-con">
       <p>create an account</p>
-      <form onSubmit={(e) => props.handleSubmit(e)}>
+      <form className="home-form" onSubmit={(e) => props.handleSubmit(e)}>
         <input
+          className="reg-in"
           type="text"
           name="username"
           placeholder="username"
@@ -15,6 +19,7 @@ const RegisterForm = (props) => {
           required
         />
         <input
+          className="reg-in"
           type="text"
           name="email"
           placeholder="email"
@@ -23,6 +28,7 @@ const RegisterForm = (props) => {
           required
         />
         <input
+          className="reg-in"
           type="text"
           name="bio"
           placeholder="bio"
@@ -31,6 +37,7 @@ const RegisterForm = (props) => {
           required
         />
         <input
+          className="reg-in"
           type="text"
           name="location"
           placeholder="location"
@@ -39,6 +46,7 @@ const RegisterForm = (props) => {
           required
         />
         <input
+          className="reg-in"
           type="password"
           name="password"
           placeholder="password"
@@ -47,6 +55,7 @@ const RegisterForm = (props) => {
           required
         />
         <input
+          className="reg-in"
           type="password"
           name="confirmPassword"
           placeholder="confirm password"
@@ -54,7 +63,7 @@ const RegisterForm = (props) => {
           onChange={(e) => props.handleChange(e)}
           required
         />
-        <button>Sign Up</button>
+        <Button size="sm" variant="outline-info" className="reg-sign">Sign Up</Button>
       </form>
     </div>
   )

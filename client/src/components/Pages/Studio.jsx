@@ -55,7 +55,7 @@ const Studio = (props) => {
     setFileName(e.target.value)
   }
 
-  const canvasProps = { galleryId, currentUser, userGalleries, isDrawing, coordinates, fileName, isADrawing, addNewDrawing, setFileName, SetGalleryId, setNewCoordinates, handleChange }
+  const canvasProps = { authenticated, galleryId, currentUser, userGalleries, isDrawing, coordinates, fileName, isADrawing, addNewDrawing, setFileName, SetGalleryId, setNewCoordinates, handleChange }
   return (
     <div className='studio'>
       <div className="canvas-container">

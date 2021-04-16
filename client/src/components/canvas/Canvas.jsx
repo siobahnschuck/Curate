@@ -3,7 +3,6 @@ import { Alert, Button } from 'react-bootstrap'
 import { SliderPicker } from 'react-color'
 import { Link } from 'react-router-dom'
 import '../../css/Canvas.css'
-import { setGalleryId } from '../../store/actions/DrawingActions'
 
 const Canvas = (props) => {
   const [show, setShow] = useState(false)
@@ -116,7 +115,7 @@ const Canvas = (props) => {
         <Button size="sm" variant="outline-danger" onClick={mode = "eraser"}>eraser</Button> */}
         <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button>
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
-        <form onSubmit={saveDrawing}>
+        {props.authenticated ? <form onSubmit={saveDrawing}>
           <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
           {props.userGalleries[0].length > 1 ?
             <select onChange={(e) => props.SetGalleryId(e.target.value)}>
@@ -129,7 +128,7 @@ const Canvas = (props) => {
             </select>
             : <Link to="/create/gallery">Create A Gallery</Link>}
           {!show && <Button size="sm" variant="outline-info" onClick={saveDrawing}>save</Button>}
-        </form>
+        </form> : null}
         <Alert show={show} variant="success">
           <Alert.Heading>Drawing Saved</Alert.Heading>
           <p>Go to your profile to see all your drawings and move them to galleries</p>

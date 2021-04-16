@@ -35,7 +35,7 @@ const GalleryReducer = (state=iState, action) => {
     case GET_ALL_GALLERY:
       return {...state, allGalleries: [action.payload]}
     case GET_GALLERY_DRAWINGS:
-      return {...state, galleryDrawings: [...state.galleryDrawings, action.payload]}
+      return {...state, galleryDrawings: action.payload}
     case DELETE_GALLERY:
       return {...state}
     case UPDATE_GALLERY:

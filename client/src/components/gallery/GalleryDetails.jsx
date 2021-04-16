@@ -21,7 +21,7 @@ const GalleryDetails = (props) => {
   const { galleryDrawings } = props.galleryState
   return (
     <div className="drawing-card" >
-      {galleryDrawings.length > 0 ? galleryDrawings[0].map((draw) => (
+      {galleryDrawings.length > 0 ? galleryDrawings.map((draw) => (
         <div key={draw.id}>
           <img className='gallery-drawing' src={draw.image} alt="drawing" />
         </div>

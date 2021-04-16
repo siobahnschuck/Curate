@@ -47,10 +47,13 @@ const mapDispatchToProps = (dispatch) => {
 const UserGallery = (props) => {
   const { userGalleries, galleryDrawings } = props.galleryState
   const { drawings } = props.drawState
+  const { authenticated } = props.authState
   useEffect(() => {
-    props.getuserGallery(props.authState.currentUser.id)
-    props.fetchUserDrawings(props.authState.currentUser.id)
-    props.fetchProfileData(props.authState.currentUser.id)
+    if (authenticated === true) {
+      props.getuserGallery(props.authState.currentUser.id)
+      props.fetchUserDrawings(props.authState.currentUser.id)
+      props.fetchProfileData(props.authState.currentUser.id)
+    }
   }, [])
 
   return (

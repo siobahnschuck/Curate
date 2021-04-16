@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Canvas from '../canvas/Canvas'
 // import DrawingTools from '../canvas/DrawingTools'
 import { connect } from 'react-redux'
@@ -9,47 +9,58 @@ import {
   createDrawing,
   deleteDrawing,
   setCoordinates,
-  setFilename
+  setFilename,
+  setGalleryId
 } from '../../store/actions/DrawingActions'
 import { verifySession } from '../../store/actions/AuthActions'
+import { getUserGallery } from '../../store/actions/GalleryActions'
 
-const mapStateToProps = ({ drawState, authState }) => {
-  return { drawState, authState }
+const mapStateToProps = ({ drawState, authState, galleryState }) => {
+  return { drawState, authState, galleryState }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     isADrawing: (formValue) => dispatch(isDrawing(formValue)),
-    addNewDrawing: (value, fileName, coords, id) => dispatch(addDrawing(value, fileName, coords, id)),
+    addNewDrawing: (value, fileName, coords, id, galleryId) => dispatch(addDrawing(value, fileName, coords, id, galleryId)),
     createNewDrawing: (body) => dispatch(createDrawing(body)),
     fetchDrawings: () => dispatch(getDrawings()),
     deleteADrawing: (id) => dispatch(deleteDrawing(id)),
     setNewCoordinates: (coordinates) => dispatch(setCoordinates(coordinates)),
     setFileName: (fileName) => dispatch(setFilename(fileName)),
+    SetGalleryId: (value) => dispatch(setGalleryId(value)),
+    // updateDrawingGallery: (id, update) => dispatch(updateDrawing(id, update)),
 
-    verified: (token) => dispatch(verifySession(token))
+    verified: (token) => dispatch(verifySession(token)),
+
+    getuserGallery: (id) => dispatch(getUserGallery(id))
   }
 }
 
 
 const Studio = (props) => {
+  const { userGalleries } = props.galleryState
+  const { coordinates, fileName, isDrawing, galleryId } = props.drawState
+  const { currentUser, authenticated } = props.authState
+  const { addNewDrawing, setFileName, SetGalleryId, isADrawing, setNewCoordinates, getuserGallery } = props
+
+  useEffect(() => {
+    if (authenticated === true) {
+      getuserGallery(currentUser.id)
+    }
+    console.log(currentUser)
+    console.log(userGalleries)
+  }, [])
   const handleChange = (e) => {
-    props.setFileName(e.target.value)
+    setFileName(e.target.value)
   }
+
+  const canvasProps = { galleryId, currentUser, userGalleries, isDrawing, coordinates, fileName, isADrawing, addNewDrawing, setFileName, SetGalleryId, setNewCoordinates, handleChange }
   return (
     <div className='studio'>
       <div className="canvas-container">
         <Canvas
-          currentUser={props.authState.currentUser}
-          isDrawing={props.drawState.isDrawing}
-          isADrawing={props.isADrawing}
-          addNewDrawing={props.addNewDrawing}
-          setNewCoordinates={props.setNewCoordinates}
-          coordinates={props.drawState.coordinates}
-          setFileName={props.setFileName}
-          fileName={props.drawState.fileName}
-          handleChange={handleChange}
-          verified={props.verified}
+          {...canvasProps}
         />
       </div>
     </div>

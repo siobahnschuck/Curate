@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Button } from 'react-bootstrap'
 import { SliderPicker } from 'react-color'
+import { Link } from 'react-router-dom'
 import '../../css/Canvas.css'
+import { setGalleryId } from '../../store/actions/DrawingActions'
 
 const Canvas = (props) => {
   const [show, setShow] = useState(false)
@@ -11,6 +13,7 @@ const Canvas = (props) => {
   // let mode = "pen"
 
   useEffect(() => {
+    console.log(props)
     const canvas = canvasRef.current
     canvas.width = window.innerWidth * 2
     canvas.height = window.innerHeight * 2
@@ -28,7 +31,7 @@ const Canvas = (props) => {
     // if (token) {
     //   props.verified(token)
     // }
-  }, [])
+  }, [props.userGalleries])
 
   const startDrawing = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
@@ -83,10 +86,12 @@ const Canvas = (props) => {
 
   const saveDrawing = async (e) => {
     e.preventDefault()
+    console.log(props.userGalleries)
     let id = props.currentUser.id
+    let galleryId = props.galleryId
     const save = canvasRef.current.toDataURL('image/png')
     let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
-    await props.addNewDrawing(blob, props.fileName, props.coordinates, id)
+    await props.addNewDrawing(blob, props.fileName, props.coordinates, id, galleryId)
     await setShow(true)
   }
 
@@ -113,6 +118,16 @@ const Canvas = (props) => {
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         <form onSubmit={saveDrawing}>
           <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
+          {props.userGalleries[0].length > 1 ?
+            <select onChange={(e) => props.SetGalleryId(e.target.value)}>
+              <option>Select a Gallery</option>
+              {props.userGalleries[0].map((gal) => (
+                <option key={gal.id} value={gal.id}>
+                  {gal.exhibition_title}
+                </option>
+              ))}
+            </select>
+            : <Link to="/create/gallery">Create A Gallery</Link>}
           {!show && <Button size="sm" variant="outline-info" onClick={saveDrawing}>save</Button>}
         </form>
         <Alert show={show} variant="success">

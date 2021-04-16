@@ -17,7 +17,7 @@ import {
   ADD_FILENAME,
   UPDATE_DRAWING,
   SELECTED_DRAWING,
-  NEW_GALLERY,
+  SET_GALLERY_ID,
 } from '../types'
 
 //GET METHODS
@@ -71,7 +71,7 @@ export const createDrawing = (body) => async (dispatch) => {
   }
 }
 
-export const addDrawing = (value, fileName, coords, id) => async (dispatch) => {
+export const addDrawing = (value, fileName, coords, id, galleryId) => async (dispatch) => {
   try {
     let backUpFilename = crypto.randomBytes(12).toString('hex')
     const formData = new FormData()
@@ -79,7 +79,7 @@ export const addDrawing = (value, fileName, coords, id) => async (dispatch) => {
     formData.append('filename', `${fileName || backUpFilename}.png`)
     formData.append('coordinates', JSON.stringify(coords))
     formData.append('user_id', id)
-    formData.append('gallery_id', 4)
+    formData.append('gallery_id', galleryId)
     await dispatch(createDrawing(formData))
   } catch (error) {
     throw error
@@ -132,7 +132,7 @@ export const setFilename = (fileName) => ({
 })
 
 export const setGalleryId = (value) => ({
-  type: NEW_GALLERY,
+  type: SET_GALLERY_ID,
   payload: value
 })
 

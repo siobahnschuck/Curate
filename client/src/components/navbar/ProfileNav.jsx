@@ -46,6 +46,7 @@ const ProfileNav = (props) => {
       throw error
     }
   }
+  const { authenticated } = props.authState
   return (
     <IconContext.Provider value={{ color: '#000' }}>
       <Navbar collapseOnSelect bg="dark" variant="dark">
@@ -66,7 +67,9 @@ const ProfileNav = (props) => {
             </NavDropdown>
           </Nav>
           <Nav>
-            <Button size="sm" variant="info" onClick={handleShow}>Sign In</Button>
+            {!authenticated ?
+              <Button size="sm" variant="info" onClick={handleShow}>Sign In</Button>
+              : <Button size="sm" variant="info" onClick={logout}>Sign Out</Button>}
             <Modal show={show} onHide={handleClose}>
               <Modal.Body>
                 <LoginForm handleLogin={handleLogin} handleChangeLogin={handleChangeLogin} />
@@ -75,7 +78,7 @@ const ProfileNav = (props) => {
                 <Button variant="outline-danger" onClick={handleClose}>Close</Button>
               </Modal.Footer>
             </Modal>
-            <Button size="sm" variant="info" onClick={logout}>Sign Out</Button>
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>

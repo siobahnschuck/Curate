@@ -8,7 +8,7 @@ const {
   UPDATE_DRAWING,
   IS_COVER,
   SELECTED_DRAWING, 
-  NEW_GALLERY
+  SET_GALLERY_ID
 } = require('../types.js')
 
 const iState = {
@@ -36,7 +36,7 @@ const DrawingReducer = (state= iState, action) => {
       return {...state, isDrawing: action.payload}
     case IS_COVER:
       return {...state, isCover: action.payload}
-    case NEW_GALLERY:
+    case SET_GALLERY_ID:
       return {...state, galleryId: action.payload}
     case GET_USER_DRAWING:
       return {...state, drawings: [...state.drawings, action.payload]}

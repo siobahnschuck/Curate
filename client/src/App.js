@@ -15,15 +15,18 @@ import GalleryDetails from './components/gallery/GalleryDetails';
 
 import {connect} from 'react-redux'
 import {setAuthenticated, verifySession} from './store/actions/AuthActions'
+import { getGalleryDrawings, getUserGallery } from './store/actions/GalleryActions';
 
-const mapStateToProps = ({authState}) => {
-  return { authState }
+const mapStateToProps = ({authState, galleryState}) => {
+  return { authState, galleryState }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     SetAuthenticated: (value) => dispatch(setAuthenticated(value)),
-    verified: (token) => dispatch(verifySession(token))
+    verified: (token) => dispatch(verifySession(token)),
+    getDrawings: (id) => dispatch(getGalleryDrawings(id)),
+    getuserGallery: (id) => dispatch(getUserGallery(id))
   }
 }
 
@@ -41,6 +44,8 @@ function App(props) {
   useEffect(() => {
     console.log('check session firing')
     checkSession()
+    // props.getDrawings(props.authState.currentUser.id)
+    // props.getuserGallery(props.authState.currentUser.id)
   }, [])
 
   return (

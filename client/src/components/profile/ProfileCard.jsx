@@ -14,8 +14,8 @@ const ProfileCard = (props) => {
       </div>
       <div>
         <h3>Activity</h3>
-        <p>Galleries~ {props.userGalleries[0].length}</p>
-        <p>Drawings~ {props.drawings.length}</p>
+        {/* <p>Galleries~ {props.userGalleries[0].length ? props.userGalleries[0].length : 0}</p>
+        <p>Drawings~ {props.drawings.length ? props.drawings.length : 0}</p> */}
         <Link className="prof-link" to="/create/gallery">create an exhibition</Link>
       </div>
     </div>

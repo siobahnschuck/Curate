@@ -44,3 +44,12 @@ export const Register = async (formData) => {
     throw error
   }
 }
+
+export const GetProfileData = async (id) => {
+  try {
+    const res = await Client.get(`/profile/info/${id}`)
+    return res.data
+  } catch (error) {
+    throw error
+  }
+}

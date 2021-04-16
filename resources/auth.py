@@ -72,3 +72,9 @@ class GalleryData(Resource):
             joinedload('galleries')).filter_by(id=user_id).first()
         gallery = [g.json() for g in user.galleries]
         return {**user.json(), 'galleries': gallery}
+
+
+class ProfileData(Resource):
+    def get(self, user_id):
+        user = User.find_by_PK(user_id)
+        return user.json(), 201

@@ -5,7 +5,7 @@ from models.db import db
 from models.user import User
 from models.drawing import Drawing
 from models.gallery import Gallery
-from resources.auth import Login, Register, Profile, GalleryData
+from resources.auth import Login, Register, Profile, GalleryData, ProfileData
 from resources.drawing import Drawings, SingleDrawing, DeleteDrawing, DrawingDetails
 from resources.gallery import Galleries, SingleGallery
 from flask_cors import CORS
@@ -26,6 +26,7 @@ migrate = Migrate(app, db)
 api.add_resource(Login, '/auth/login')
 api.add_resource(Register, '/auth/register')
 api.add_resource(Profile, '/auth/profile/<int:user_id>')
+api.add_resource(ProfileData, '/profile/info/<int:user_id>')
 api.add_resource(GalleryData, '/profile/<int:user_id>')
 api.add_resource(Drawings, '/drawings')
 api.add_resource(SingleDrawing, '/drawings/<int:drawing_id>')

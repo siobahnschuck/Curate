@@ -3,7 +3,8 @@ import {
   DeleteProfile,
   Register,
   UpdateProfile,
-  Verify
+  Verify,
+  GetProfileData
 } from '../../services/AuthServices'
 
 import {
@@ -15,6 +16,7 @@ import {
   ADD_LOGIN,
   CHECK_SESSION,
   SET_AUTHENTICATED,
+  SET_USER_DATA,
 } from '../types'
 
 
@@ -94,6 +96,18 @@ export const verifySession = (token) => async (dispatch) => {
     dispatch({
       type: CHECK_SESSION,
       payload: verified
+    })
+  } catch (error) {
+    throw error
+  }
+}
+
+export const getProfileData = (id) => async (dispatch) => {
+  try {
+    const data = await GetProfileData(id)
+    dispatch({
+      type: SET_USER_DATA,
+      payload: data
     })
   } catch (error) {
     throw error

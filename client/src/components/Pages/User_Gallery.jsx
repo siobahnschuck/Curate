@@ -17,7 +17,8 @@ import {
 import {
   addUser,
   updateProfile,
-  verifySession
+  verifySession,
+  getProfileData
 } from '../../store/actions/AuthActions'
 import ProfileCard from '../profile/ProfileCard'
 
@@ -38,7 +39,8 @@ const mapDispatchToProps = (dispatch) => {
 
     updateAProfile: (id, body) => dispatch(updateProfile(id, body)),
     addNewUser: (name, value) => dispatch(addUser(name, value)),
-    verified: (token) => dispatch(verifySession(token))
+    verified: (token) => dispatch(verifySession(token)),
+    fetchProfileData: (id) => dispatch(getProfileData(id))
   }
 }
 
@@ -48,12 +50,17 @@ const UserGallery = (props) => {
   useEffect(() => {
     props.getuserGallery(props.authState.currentUser.id)
     props.fetchUserDrawings(props.authState.currentUser.id)
+    props.fetchProfileData(props.authState.currentUser.id)
   }, [])
 
   return (
     <div className="profile">
       <div className="user-info">
-        <ProfileCard />
+        <ProfileCard
+          userInfo={props.authState.userInfo}
+          drawings={drawings}
+          userGalleries={userGalleries}
+        />
       </div>
       <div className="gal-card-con">
         <GalleryCard

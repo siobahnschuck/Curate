@@ -3,11 +3,13 @@ export const REGISTER = 'REGISTER'
 export const LOGIN = 'LOGIN'
 export const ADD_USER = 'ADD_USER'
 export const ADD_LOGIN= 'ADD_LOGIN'
+export const SET_AUTHENTICATED = 'SET_AUTHENTICATED'
+export const CHECK_SESSION = 'CHECK_SESSION'
+//profile
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
 export const DELETE_PROFILE = 'DELETE_PROFILE'
-export const CHECK_SESSION = 'CHECK_SESSION'
-export const SET_AUTHENTICATED = 'SET_AUTHENTICATED'
-export const SESSION = 'SESSION'
+export const SET_USER_DATA = 'SET_USER_DATA'
+
 // *** GALLERY TYPES *** //
 export const CREATE_GALLERY = 'CREATE_GALLERY'
 export const ADD_GALLERY = 'ADD_GALLERY'

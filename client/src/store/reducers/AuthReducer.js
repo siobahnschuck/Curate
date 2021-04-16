@@ -8,11 +8,13 @@ const {
   CHECK_SESSION,
   SET_AUTHENTICATED, 
   SESSION,
+  SET_USER_DATA,
 } = require('../types.js')
 
 const iState = {
   currentUser: null,
   authenticated: false,
+  userInfo: [],
   loginForm: {
     email: '',
     password: ''
@@ -63,6 +65,8 @@ const AuthReducer = (state=iState, action) => {
       }
     case DELETE_PROFILE:
       return {...state}
+    case SET_USER_DATA:
+      return {...state, userInfo: action.payload}
     default:
       return {...state}
   }

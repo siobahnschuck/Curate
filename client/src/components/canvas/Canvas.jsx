@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Button } from 'react-bootstrap'
+import { SliderPicker } from 'react-color'
 import '../../css/Canvas.css'
 
 const Canvas = (props) => {
   const [show, setShow] = useState(false)
+  const [colorHexCode, setColorHexCode] = useState('#000000')
   const canvasRef = useRef(null)
   const contextRef = useRef(null)
+  // let mode = "pen"
+  let token = localStorage.getItem('token')
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -17,9 +21,13 @@ const Canvas = (props) => {
     const context = canvas.getContext('2d', { preserveDrawingBuffer: true })
     context.scale(2, 2)
     context.lineCap = 'round'
-    context.strokeStyle = "black"
+    context.strokeStyle = colorHexCode
     context.lineWidth = 5
     contextRef.current = context
+
+    if (token) {
+      props.verified(token)
+    }
   }, [])
 
   const startDrawing = ({ nativeEvent }) => {
@@ -35,17 +43,32 @@ const Canvas = (props) => {
     props.isADrawing(false)
   }
   const draw = ({ nativeEvent }) => {
+    const { offsetX, offsetY } = nativeEvent
     if (!props.isDrawing) {
       return
     }
-    const { offsetX, offsetY } = nativeEvent
+    // if (mode === "pen") {
     contextRef.current.lineTo(offsetX, offsetY)
     contextRef.current.stroke()
     props.setNewCoordinates({ x: offsetX, y: offsetY })
+    // } else {
+    //   // contextRef.current.globalCompositeOperation = "destination-out"
+    //   // contextRef.current.arc(offsetX, offsetY, 8, 0, Math.PI * 2, false)
+    //   contextRef.current.fill()
+    // }
   }
 
   const clearDrawing = () => {
     contextRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+    props.setNewCoordinates("")
+  }
+
+  // const eraser = () => {
+  // }
+
+  const undo = () => {
+    // let coordClone = [].concat(props.coordinates)
+    return props.coordinates.pop()
   }
 
   function convertToBlob(base64data) {
@@ -57,12 +80,13 @@ const Canvas = (props) => {
     }
     return new Blob([ba], { type: "image/png" });
   }
+
   const saveDrawing = async (e) => {
     e.preventDefault()
-    const save = canvasRef.current.toDataURL('image/png')
-    let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
-    await props.addNewDrawing(blob, props.fileName, props.coordinates)
-    await setShow(true)
+      const save = canvasRef.current.toDataURL('image/png')
+      let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
+      await props.addNewDrawing(blob, props.fileName, props.coordinates, props.currentUser.id)
+      await setShow(true)
   }
 
   return (
@@ -78,6 +102,13 @@ const Canvas = (props) => {
         ref={canvasRef}
       />
       <div>
+        <SliderPicker
+          color={colorHexCode}
+          onChangeComplete={color => setColorHexCode(color.hex)}
+        />
+        {/* <Button size="sm" variant="outline-danger" onClick={mode = "pen"}>pen</Button>
+        <Button size="sm" variant="outline-danger" onClick={mode = "eraser"}>eraser</Button> */}
+        <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button>
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         <form onSubmit={saveDrawing}>
           <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />

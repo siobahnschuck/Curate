@@ -20,7 +20,7 @@ const LoginForm = (props) => {
           onChange={(e) => props.handleChangeLogin(e)}
           required
         />
-        <button>Login</button>
+        <button onSubmit={(e) => props.handleLogin(e)}>Login</button>
       </form>
     </div>
   )

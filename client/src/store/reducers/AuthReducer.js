@@ -48,7 +48,7 @@ const AuthReducer = (state=iState, action) => {
     case REGISTER:
       return {...state}
     case LOGIN:
-      return {...state}
+      return {...state, currentUser: action.payload}
     case SESSION:
       return {...state}
     case CHECK_SESSION:

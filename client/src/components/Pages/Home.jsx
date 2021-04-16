@@ -1,7 +1,7 @@
 import React from 'react'
 import RegisterForm from '../Forms/registerForm'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+// import { useHistory } from 'react-router-dom'
 import { addUser, addLogin, createUser, createLogin, setAuthenticated, checkSession, verifySession } from '../../store/actions/AuthActions'
 import LoginForm from '../Forms/loginForm'
 
@@ -23,17 +23,15 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const Home = (props) => {
-  const { registerForm, loginForm } = props.authState
+  const { registerForm, loginForm, currentUser } = props.authState
 
   //AUTH
-  const session = () => {
-    let token = localStorage.getItem('token')
-    if (token) {
-      const res = props.verifyLogin()
-      props.CheckSession(res)
-      props.SetAuthenticated(true)
-    }
-  }
+  // const session = () => {
+  //   let token = localStorage.getItem('token')
+  //   if (token) {
+  //     props.SetAuthenticated(true)
+  //   }
+  // }
 
   const handleChange = (e) => {
     props.addNewUser(e.target.name, e.target.value)
@@ -49,9 +47,15 @@ const Home = (props) => {
     props.newLogin(e.target.name, e.target.value)
   }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    props.createNewLogin(loginForm)
+    try {
+      await props.createNewLogin(loginForm)
+      localStorage.setItem('token', currentUser.token)
+      props.SetAuthenticated(true)
+    } catch (error) {
+      throw error
+    }
   }
 
 

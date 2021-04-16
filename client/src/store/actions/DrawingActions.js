@@ -71,6 +71,21 @@ export const createDrawing = (body) => async (dispatch) => {
   }
 }
 
+export const addDrawing = (value, fileName, coords, id) => async (dispatch) => {
+  try {
+    let backUpFilename = crypto.randomBytes(12).toString('hex')
+    const formData = new FormData()
+    formData.append('image', value)
+    formData.append('filename', `${fileName || backUpFilename}.png`)
+    formData.append('coordinates', JSON.stringify(coords))
+    formData.append('user_id', id)
+    formData.append('gallery_id', 4)
+    await dispatch(createDrawing(formData))
+  } catch (error) {
+    throw error
+  }
+}
+
 //PUT METHODS
 
 export const updateDrawing = (id, update) => async (dispatch) => {
@@ -99,20 +114,7 @@ export const deleteDrawing = (filename, id) => async (dispatch) => {
   }
 }
 
-export const addDrawing = (value, fileName, coords) => async (dispatch) => {
-  try {
-    let backUpFilename = crypto.randomBytes(12).toString('hex')
-    const formData = new FormData()
-    formData.append('image', value)
-    formData.append('filename', `${fileName || backUpFilename}.png`)
-    formData.append('coordinates', JSON.stringify(coords))
-    formData.append('user_id', 3)
-    formData.append('gallery_id', 4)
-    await dispatch(createDrawing(formData))
-  } catch (error) {
-    throw error
-  }
-}
+
 
 export const isDrawing = (formValue) => ({
   type: IS_DRAWING,

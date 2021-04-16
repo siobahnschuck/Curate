@@ -3,6 +3,7 @@ import Client from '.'
 export const Login = async (formData) => {
   try {
     const res = await Client.post(`/auth/login`, formData)
+    console.log(res.data)
     return res.data
   } catch (error) {
     throw error
@@ -11,7 +12,7 @@ export const Login = async (formData) => {
 
 export const DeleteProfile = async (id) => {
   try {
-    const res = await Client.delete(`/auth/profile/${id}`)
+    await Client.delete(`/auth/profile/${id}`)
   } catch (error) {
     throw error
   }
@@ -19,7 +20,7 @@ export const DeleteProfile = async (id) => {
 
 export const UpdateProfile = async (id, body) => {
   try {
-    const res = await Client.put(`/auth/profile/${id}`, body)
+    await Client.put(`/auth/profile/${id}`, body)
   } catch (error) {
     throw error
   }

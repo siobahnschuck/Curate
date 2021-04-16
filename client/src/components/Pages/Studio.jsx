@@ -1,6 +1,6 @@
 import React from 'react'
 import Canvas from '../canvas/Canvas'
-import DrawingTools from '../canvas/DrawingTools'
+// import DrawingTools from '../canvas/DrawingTools'
 import { connect } from 'react-redux'
 import {
   addDrawing,
@@ -11,9 +11,10 @@ import {
   setCoordinates,
   setFilename
 } from '../../store/actions/DrawingActions'
+import {verifySession} from '../../store/actions/AuthActions'
 
-const mapStateToProps = ({ drawState }) => {
-  return { drawState }
+const mapStateToProps = ({ drawState, authState }) => {
+  return { drawState, authState }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -24,7 +25,9 @@ const mapDispatchToProps = (dispatch) => {
     fetchDrawings: () => dispatch(getDrawings()),
     deleteADrawing: (id) => dispatch(deleteDrawing(id)),
     setNewCoordinates: (coordinates) => dispatch(setCoordinates(coordinates)),
-    setFileName: (fileName) => dispatch(setFilename(fileName))
+    setFileName: (fileName) => dispatch(setFilename(fileName)),
+    
+    verified: (token) => dispatch(verifySession(token))
   }
 }
 
@@ -37,6 +40,7 @@ const Studio = (props) => {
     <div className='studio'>
       <div className="canvas-container">
         <Canvas
+          currentUser={props.authState.currentUser}
           isDrawing={props.drawState.isDrawing}
           isADrawing={props.isADrawing}
           addNewDrawing={props.addNewDrawing}
@@ -45,6 +49,7 @@ const Studio = (props) => {
           setFileName={props.setFileName}
           fileName={props.drawState.fileName}
           handleChange={handleChange}
+          verified={props.verified}
         />
       </div>
     </div>

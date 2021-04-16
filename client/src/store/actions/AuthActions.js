@@ -15,7 +15,6 @@ import {
   ADD_LOGIN,
   CHECK_SESSION,
   SET_AUTHENTICATED,
-  SESSION
 } from '../types'
 
 
@@ -94,11 +93,11 @@ export const updateProfile = (id, body) => async (dispatch) => {
   }
 }
 
-export const verifySession = () => async (dispatch) => {
+export const verifySession = (token) => async (dispatch) => {
   try {
-    const verified = await GetLogin()
+    const verified = await GetLogin(token)
     dispatch({
-      type: SESSION,
+      type: CHECK_SESSION,
       payload: verified
     })
   } catch (error) {

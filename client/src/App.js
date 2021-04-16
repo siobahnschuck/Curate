@@ -1,12 +1,12 @@
 import './css/App.css';
 import {Route, Switch} from 'react-router-dom'
-import Header from './components/Pages/Header'
+// import Header from './components/Pages/Header'
 import Home from './components/Pages/Home'
 import Studio from './components/Pages/Studio'
 import Explore from './components/Pages/Explore'
 import UserGallery from './components/Pages/User_Gallery';
 import ProfileForm from './components/Forms/profileForm'
-import Navbar from './components/navbar/Navbar';
+// import Navbar from './components/navbar/Navbar';
 import ProfileNav from './components/navbar/ProfileNav'
 import GalleryForm from './components/Forms/galleryForm';
 import DrawingDetails from './components/drawings/DrawingDetails';

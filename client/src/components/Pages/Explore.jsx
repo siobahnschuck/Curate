@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import '../../css/Explore.css'
 import { connect } from 'react-redux'
-import GalleryCard from '../gallery/GalleryCard'
+// import GalleryCard from '../gallery/GalleryCard'
 import {
   getAllGallery, getGalleryDrawings
 } from '../../store/actions/GalleryActions'

@@ -16,7 +16,8 @@ import {
 } from '../../store/actions/DrawingActions'
 import {
   addUser,
-  updateProfile
+  updateProfile,
+  verifySession
 } from '../../store/actions/AuthActions'
 import ProfileCard from '../profile/ProfileCard'
 
@@ -36,16 +37,24 @@ const mapDispatchToProps = (dispatch) => {
     getDrawings: (id) => dispatch(getGalleryDrawings(id)),
 
     updateAProfile: (id, body) => dispatch(updateProfile(id, body)),
-    addNewUser: (name, value) => dispatch(addUser(name, value))
+    addNewUser: (name, value) => dispatch(addUser(name, value)),
+    verified: (token) => dispatch(verifySession(token))
   }
 }
 
 const UserGallery = (props) => {
   const { userGalleries, galleryDrawings } = props.galleryState
   const { drawings } = props.drawState
+  const { currentUser } = props.authState
+  let token = localStorage.getItem('token')
   useEffect(() => {
-    props.getuserGallery(3)
-    props.fetchUserDrawings(3)
+    if (token) {
+      props.verified(token)
+      if (currentUser.id) {
+        props.getuserGallery(currentUser.id)
+        props.fetchUserDrawings(currentUser.id)
+      }
+    }
   }, [])
   return (
     <div className="profile">

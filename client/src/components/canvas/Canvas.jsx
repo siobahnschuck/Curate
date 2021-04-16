@@ -9,7 +9,6 @@ const Canvas = (props) => {
   const canvasRef = useRef(null)
   const contextRef = useRef(null)
   // let mode = "pen"
-  let token = localStorage.getItem('token')
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -25,9 +24,10 @@ const Canvas = (props) => {
     context.lineWidth = 5
     contextRef.current = context
 
-    if (token) {
-      props.verified(token)
-    }
+    // let token = localStorage.getItem('token')
+    // if (token) {
+    //   props.verified(token)
+    // }
   }, [])
 
   const startDrawing = ({ nativeEvent }) => {
@@ -83,10 +83,11 @@ const Canvas = (props) => {
 
   const saveDrawing = async (e) => {
     e.preventDefault()
-      const save = canvasRef.current.toDataURL('image/png')
-      let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
-      await props.addNewDrawing(blob, props.fileName, props.coordinates, props.currentUser.id)
-      await setShow(true)
+    let id = props.currentUser.id
+    const save = canvasRef.current.toDataURL('image/png')
+    let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
+    await props.addNewDrawing(blob, props.fileName, props.coordinates, id)
+    await setShow(true)
   }
 
   return (

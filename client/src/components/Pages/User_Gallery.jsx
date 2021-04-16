@@ -45,17 +45,11 @@ const mapDispatchToProps = (dispatch) => {
 const UserGallery = (props) => {
   const { userGalleries, galleryDrawings } = props.galleryState
   const { drawings } = props.drawState
-  const { currentUser } = props.authState
-  let token = localStorage.getItem('token')
   useEffect(() => {
-    if (token) {
-      props.verified(token)
-      if (currentUser.id) {
-        props.getuserGallery(currentUser.id)
-        props.fetchUserDrawings(currentUser.id)
-      }
-    }
+    props.getuserGallery(props.authState.currentUser.id)
+    props.fetchUserDrawings(props.authState.currentUser.id)
   }, [])
+
   return (
     <div className="profile">
       <div className="user-info">

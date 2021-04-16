@@ -1,34 +1,81 @@
-import React from 'react'
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import React, { useState } from 'react'
+import LoginForm from '../Forms/loginForm'
+import { Navbar, Nav, NavDropdown, Button, Modal, Alert } from 'react-bootstrap'
 import * as FaIcons from 'react-icons/fa'
 import * as RiIcons from 'react-icons/ri'
 import { IconContext } from 'react-icons'
-
+import logo from '../../imgs/logo400_circle.png'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { connect } from 'react-redux'
+import { useHistory, NavLink } from 'react-router-dom'
+import { setAuthenticated, createLogin, addLogin } from '../../store/actions/AuthActions'
+const mapStateToProps = ({ authState }) => {
+  return { authState }
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    SetAuthenticated: (value) => dispatch(setAuthenticated(value)),
+    createNewLogin: (formData) => dispatch(createLogin(formData)),
+    newLogin: (name, value) => dispatch(addLogin(name, value)),
+  }
+}
 
-const ProfileNav = () => {
+const ProfileNav = (props) => {
+  const history = useHistory()
+  const { loginForm, currentUser } = props.authState
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  const logout = () => {
+    props.SetAuthenticated(false)
+    localStorage.clear()
+    return history.push('/')
+  }
+  const handleChangeLogin = (e) => {
+    props.newLogin(e.target.name, e.target.value)
+  }
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    try {
+      await props.createNewLogin(loginForm)
+      // localStorage.setItem('token', currentUser.token)
+      props.SetAuthenticated(true)
+      handleClose()
+    } catch (error) {
+      throw error
+    }
+  }
   return (
-    <IconContext.Provider value={{ color: '#388697' }}>
-      <Navbar collapseOnSelect bg="light" variant="light">
+    <IconContext.Provider value={{ color: '#000' }}>
+      <Navbar collapseOnSelect bg="dark" variant="dark">
         <Navbar.Brand href="/">
-          <img src='../../../public/logo_400px.png' alt="logo" width="30" height="30" />
+          <img src={logo} alt="logo" width="40" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse>
           <Nav className="navigation">
-            <Nav.Link href="/"><FaIcons.FaHome /> Home</Nav.Link>
-            <Nav.Link href="/studio"><FaIcons.FaPaintBrush /> Studio</Nav.Link>
-            <Nav.Link href="/explore"><FaIcons.FaGlobeAmericas /> Explore</Nav.Link>
+            <NavLink to="/"><FaIcons.FaHome /> Home</NavLink>
+            <NavLink to="/studio"><FaIcons.FaPaintBrush /> Studio</NavLink>
+            <NavLink to="/explore"><FaIcons.FaGlobeAmericas /> Explore</NavLink>
             <NavDropdown title="Profile" id="drop-down">
-              <NavDropdown.Item href="/edit"><FaIcons.FaUserEdit /> Edit Profile</NavDropdown.Item>
-              <NavDropdown.Item href="/create/gallery"><RiIcons.RiGalleryLine /> Create New Gallery</NavDropdown.Item>
+              <NavDropdown.Item><NavLink to="/edit"><FaIcons.FaUserEdit /> Edit Profile</NavLink></NavDropdown.Item>
+              <NavDropdown.Item><NavLink to="/create/gallery"><RiIcons.RiGalleryLine /> Create New Gallery</NavLink></NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/profile"> <FaIcons.FaUserCircle /> My Profile </NavDropdown.Item>
+              <NavDropdown.Item > <NavLink to="/profile"><FaIcons.FaUserCircle /> My Profile</NavLink> </NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
-            <Nav.Link>SignIn</Nav.Link>
+            <Button size="sm" variant="info" onClick={handleShow}>Sign In</Button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Body>
+                <LoginForm handleLogin={handleLogin} handleChangeLogin={handleChangeLogin} />
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="outline-danger" onClick={handleClose}>Close</Button>
+              </Modal.Footer>
+            </Modal>
+            <Button size="sm" variant="info" onClick={logout}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -36,4 +83,4 @@ const ProfileNav = () => {
   )
 }
 
-export default ProfileNav
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileNav)

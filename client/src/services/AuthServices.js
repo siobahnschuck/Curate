@@ -4,7 +4,8 @@ export const Login = async (formData) => {
   try {
     const res = await Client.post(`/auth/login`, formData)
     console.log(res.data)
-    return res.data
+    localStorage.setItem('token', res.data.token)
+    return res.data.payload
   } catch (error) {
     throw error
   }
@@ -26,10 +27,9 @@ export const UpdateProfile = async (id, body) => {
   }
 }
 
-export const GetLogin = async () => {
+export const Verify = async () => {
   try {
     const res = await Client.get(`/auth/login`)
-    console.log(res)
     return res.data
   } catch (error) {
     throw error

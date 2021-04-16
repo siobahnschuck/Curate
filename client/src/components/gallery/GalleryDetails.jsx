@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import {  useParams } from 'react-router'
+import { useParams } from 'react-router'
 import { getGalleryDrawings } from '../../store/actions/GalleryActions'
 
 const mapStateToProps = ({ galleryState }) => {
@@ -14,14 +14,14 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const GalleryDetails = (props) => {
+  const { id } = useParams()
   useEffect(() => {
     props.getDrawings(id)
   }, [])
   const { galleryDrawings } = props.galleryState
-  const { id } = useParams()
   return (
     <div className="drawing-card" >
-      {galleryDrawings.length > 0 && id == galleryDrawings[0][0].gallery_id ? galleryDrawings[0].map((draw) => (
+      {galleryDrawings.length > 0 ? galleryDrawings[0].map((draw) => (
         <div key={draw.id}>
           <img className='gallery-drawing' src={draw.image} alt="drawing" />
         </div>

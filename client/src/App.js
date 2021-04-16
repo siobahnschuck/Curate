@@ -1,3 +1,4 @@
+import React, {useEffect} from 'react'
 import './css/App.css';
 import {Route, Switch} from 'react-router-dom'
 // import Header from './components/Pages/Header'
@@ -12,7 +13,36 @@ import GalleryForm from './components/Forms/galleryForm';
 import DrawingDetails from './components/drawings/DrawingDetails';
 import GalleryDetails from './components/gallery/GalleryDetails';
 
-function App() {
+import {connect} from 'react-redux'
+import {setAuthenticated, verifySession} from './store/actions/AuthActions'
+
+const mapStateToProps = ({authState}) => {
+  return { authState }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    SetAuthenticated: (value) => dispatch(setAuthenticated(value)),
+    verified: (token) => dispatch(verifySession(token))
+  }
+}
+
+
+function App(props) {
+
+  const checkSession = () => {
+    let token = localStorage.getItem('token')
+    if (token) {
+      props.verified(token)
+      props.SetAuthenticated(true)
+    }
+  }
+
+  useEffect(() => {
+    console.log('check session firing')
+    checkSession()
+  }, [])
+
   return (
     <div className="App"> 
     {/* <Header/> */}
@@ -53,4 +83,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -11,7 +11,7 @@ import {
   setCoordinates,
   setFilename
 } from '../../store/actions/DrawingActions'
-import {verifySession} from '../../store/actions/AuthActions'
+import { verifySession } from '../../store/actions/AuthActions'
 
 const mapStateToProps = ({ drawState, authState }) => {
   return { drawState, authState }
@@ -20,13 +20,13 @@ const mapStateToProps = ({ drawState, authState }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     isADrawing: (formValue) => dispatch(isDrawing(formValue)),
-    addNewDrawing: (value, fileName, coords) => dispatch(addDrawing(value, fileName, coords)),
+    addNewDrawing: (value, fileName, coords, id) => dispatch(addDrawing(value, fileName, coords, id)),
     createNewDrawing: (body) => dispatch(createDrawing(body)),
     fetchDrawings: () => dispatch(getDrawings()),
     deleteADrawing: (id) => dispatch(deleteDrawing(id)),
     setNewCoordinates: (coordinates) => dispatch(setCoordinates(coordinates)),
     setFileName: (fileName) => dispatch(setFilename(fileName)),
-    
+
     verified: (token) => dispatch(verifySession(token))
   }
 }

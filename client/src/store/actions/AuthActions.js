@@ -3,7 +3,7 @@ import {
   DeleteProfile,
   Register,
   UpdateProfile,
-  GetLogin
+  Verify
 } from '../../services/AuthServices'
 
 import {
@@ -36,11 +36,6 @@ export const addLogin = (name, value) => ({
 
 export const setAuthenticated = (value) => ({
   type: SET_AUTHENTICATED,
-  payload: value
-})
-
-export const checkSession = (value) => ({
-  type: CHECK_SESSION,
   payload: value
 })
 
@@ -95,7 +90,7 @@ export const updateProfile = (id, body) => async (dispatch) => {
 
 export const verifySession = (token) => async (dispatch) => {
   try {
-    const verified = await GetLogin(token)
+    const verified = await Verify(token)
     dispatch({
       type: CHECK_SESSION,
       payload: verified

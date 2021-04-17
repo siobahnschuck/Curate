@@ -117,16 +117,17 @@ const Canvas = (props) => {
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         {props.authenticated ? <form onSubmit={saveDrawing}>
           <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
-          {props.userGalleries[0].length > 1 ?
-            <select onChange={(e) => props.SetGalleryId(e.target.value)}>
-              <option>Select a Gallery</option>
-              {props.userGalleries[0].map((gal) => (
-                <option key={gal.id} value={gal.id}>
-                  {gal.exhibition_title}
-                </option>
-              ))}
-            </select>
-            : <Link to="/create/gallery">Create A Gallery</Link>}
+          {props.userGalleries[0] ?
+            props.userGalleries[0].length ?
+              <select onChange={(e) => props.SetGalleryId(e.target.value)}>
+                <option>Select a Gallery</option>
+                {props.userGalleries[0].map((gal) => (
+                  <option key={gal.id} value={gal.id}>
+                    {gal.exhibition_title}
+                  </option>
+                ))}
+              </select>
+              : <Link to="/create/gallery">Create A Gallery</Link> : null}
           {!show && <Button size="sm" variant="outline-info" onClick={saveDrawing}>save</Button>}
         </form> : null}
         <Alert show={show} variant="success">

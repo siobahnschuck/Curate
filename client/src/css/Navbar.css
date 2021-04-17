@@ -75,6 +75,7 @@ span {
 
 /* PROFILE NAV */
 .navigation {
+  display: flex;
   width: 95%;
   height: 100%;
   display: flex;
@@ -93,4 +94,18 @@ span {
   text-decoration: none;
   color: rgb(206, 197, 197);
   font-size: 18px;
+}
+
+.nav-item {
+  color: white;
+}
+
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+a {
+  font-size: 18px;
+  color: white;
 }

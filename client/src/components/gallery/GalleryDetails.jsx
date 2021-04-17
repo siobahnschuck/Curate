@@ -17,6 +17,7 @@ const GalleryDetails = (props) => {
   const { id } = useParams()
   useEffect(() => {
     props.getDrawings(id)
+    // eslint-disable-next-line
   }, [])
   const { galleryDrawings } = props.galleryState
   return (

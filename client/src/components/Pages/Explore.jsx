@@ -33,10 +33,12 @@ const Explore = (props) => {
 
   return (
     <div className="explore">
-      <ExploreGallery
-        allGalleries={props.galleryState.allGalleries}
-        handleExpand={handleExpand}
-      />
+      <div className="explore-card">
+        <ExploreGallery
+          allGalleries={props.galleryState.allGalleries}
+          handleExpand={handleExpand}
+        />
+      </div>
     </div>
   )
 }

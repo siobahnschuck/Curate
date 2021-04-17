@@ -1,17 +1,16 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
 const ExploreGallery = (props) => {
   return (
     <div className="explore-container">
-      <div className="ex-gall-card">
-        {props.allGalleries.length ? props.allGalleries[0].map((gallery) => (
-          <div className="card">
-            <h1>{gallery.exhibition_title}</h1>
-            <p>{gallery.description}</p>
-            <button onClick={() => props.handleExpand(gallery.id)}>View Details</button>
-          </div>
-        )) : null}
-      </div>
+      {props.allGalleries.length ? props.allGalleries[0].map((gallery) => (
+        <div className="card">
+          <h3>{gallery.exhibition_title}</h3>
+          <p>{gallery.description}</p>
+          <Button variant="dark" size="sm" onClick={() => props.handleExpand(gallery.id)}>Drawings</Button>
+        </div>
+      )) : null}
     </div>
   )
 }

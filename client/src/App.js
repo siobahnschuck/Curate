@@ -44,8 +44,11 @@ function App(props) {
   useEffect(() => {
     console.log('check session firing')
     checkSession()
-    // props.getDrawings(props.authState.currentUser.id)
-    // props.getuserGallery(props.authState.currentUser.id)
+    if (props.authState.authenticated){
+      props.getDrawings(props.authState.currentUser.id)
+      props.getuserGallery(props.authState.currentUser.id)
+      // eslint-disable-next-line
+    }
   }, [])
 
   return (

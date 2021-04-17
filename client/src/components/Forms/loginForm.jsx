@@ -1,5 +1,6 @@
 import React from 'react'
 import '../../css/Form.css'
+import { Button } from 'react-bootstrap'
 
 const LoginForm = (props) => {
   return (
@@ -20,7 +21,7 @@ const LoginForm = (props) => {
           onChange={(e) => props.handleChangeLogin(e)}
           required
         />
-        <button onSubmit={(e) => props.handleLogin(e)}>Login</button>
+        <Button variant="outline-success" onSubmit={(e) => props.handleLogin(e)}>Login</Button>
       </form>
     </div>
   )

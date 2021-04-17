@@ -1,6 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router'
 import '../../css/Profile.css'
+import * as AiIcons from 'react-icons/ai'
+import { CgMoreO } from 'react-icons/cg'
 
 
 const DrawingCard = (props) => {
@@ -11,14 +13,14 @@ const DrawingCard = (props) => {
 
 
   return (
-    <div>
-      <h2>Drawings</h2>
+    <div >
+      <h2 className="draw-title">{props.drawings.length ? props.drawings[0].length : 0} Drawings</h2>
       <div className="drawing-card">
         {props.drawings.length ? props.drawings[0].map((drawing) => (
-          <div key={drawing.id}>
+          <div className="drawing-con" key={drawing.id}>
             <img className="drawing" src={drawing.image} alt="drawing" />
-            <button onClick={() => handleEdit(drawing.id)}>EDIT/DETAILS</button>
-            <button onClick={() => props.deleteADrawing(drawing.filename, drawing.id)}>DELETE</button>
+            <button className="draw-btns" onClick={() => handleEdit(drawing.id)}><CgMoreO /></button>
+            <button className="draw-btns" onClick={() => props.deleteADrawing(drawing.filename, drawing.id)}><AiIcons.AiTwotoneDelete /></button>
           </div>
         )) : null}
       </div>

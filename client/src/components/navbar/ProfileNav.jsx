@@ -49,40 +49,40 @@ const ProfileNav = (props) => {
   const { authenticated } = props.authState
   return (
     <IconContext.Provider value={{ color: '#000' }}>
-      <Navbar collapseOnSelect bg="dark" variant="dark">
+      <Navbar expand="true" collapseOnSelect bg="dark" variant="dark">
         <Navbar.Brand href="/">
           <img src={logo} alt="logo" width="40" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse>
+        <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="navigation">
-            <NavLink to="/"><FaIcons.FaHome /> Home</NavLink>
-            <NavLink to="/studio"><FaIcons.FaPaintBrush /> Studio</NavLink>
-            <NavLink to="/explore"><FaIcons.FaGlobeAmericas /> Explore</NavLink>
-            <NavDropdown title="Profile" id="drop-down">
-              <NavDropdown.Item><NavLink to="/edit"><FaIcons.FaUserEdit /> Edit Profile</NavLink></NavDropdown.Item>
-              <NavDropdown.Item><NavLink to="/create/gallery"><RiIcons.RiGalleryLine /> Create New Gallery</NavLink></NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item > <NavLink to="/profile"><FaIcons.FaUserCircle /> My Profile</NavLink> </NavDropdown.Item>
-            </NavDropdown>
+            <Nav.Link><NavLink className="nav-item" to="/"><FaIcons.FaHome /> Home</NavLink></Nav.Link>
+            <Nav.Link><NavLink className="nav-item" to="/studio"><FaIcons.FaPaintBrush /> Studio</NavLink></Nav.Link>
+            <Nav.Link><NavLink className="nav-item" to="/explore"><FaIcons.FaGlobeAmericas /> Explore</NavLink></Nav.Link>
           </Nav>
-          <Nav>
-            {!authenticated ?
-              <Button size="sm" variant="info" onClick={handleShow}>Sign In</Button>
-              : <Button size="sm" variant="info" onClick={logout}>Sign Out</Button>}
-            <Modal show={show} onHide={handleClose}>
-              <Modal.Body>
-                <LoginForm handleLogin={handleLogin} handleChangeLogin={handleChangeLogin} />
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="outline-danger" onClick={handleClose}>Close</Button>
-              </Modal.Footer>
-            </Modal>
-
-          </Nav>
+          {authenticated ? <NavDropdown title="Profile" id="drop-down" >
+            <NavDropdown.Item><NavLink to="/edit"><FaIcons.FaUserEdit /> Edit Profile</NavLink></NavDropdown.Item>
+            <NavDropdown.Item><NavLink to="/create/gallery"><RiIcons.RiGalleryLine /> Create New Gallery</NavLink></NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item > <NavLink to="/profile"><FaIcons.FaUserCircle /> My Profile</NavLink> </NavDropdown.Item>
+          </NavDropdown> : null}
         </Navbar.Collapse>
+        <Nav>
+          {!authenticated ?
+            <Button size="sm" variant="info" onClick={handleShow}>Sign In</Button>
+            : <Button size="sm" variant="info" onClick={logout}>Sign Out</Button>}
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Body>
+              <LoginForm handleLogin={handleLogin} handleChangeLogin={handleChangeLogin} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="outline-danger" onClick={handleClose}>Close</Button>
+            </Modal.Footer>
+          </Modal>
+
+        </Nav>
       </Navbar>
-    </IconContext.Provider>
+    </IconContext.Provider >
   )
 }
 

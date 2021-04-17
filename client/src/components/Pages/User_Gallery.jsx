@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
     deleteADrawing: (filename, id) => dispatch(deleteDrawing(filename, id)),
     updateADrawing: (id) => dispatch(updateDrawing(id)),
 
-    getuserGallery: (id) => dispatch(getUserGallery(id)),
+    fetchUserGallery: (id) => dispatch(getUserGallery(id)),
     deleteAGallery: (id) => dispatch(deleteGallery(id)),
     updateGallery: (id) => dispatch(updateGallery(id)),
     getDrawings: (id) => dispatch(getGalleryDrawings(id)),
@@ -47,20 +47,22 @@ const mapDispatchToProps = (dispatch) => {
 const UserGallery = (props) => {
   const { userGalleries, galleryDrawings } = props.galleryState
   const { drawings } = props.drawState
-  const { authenticated } = props.authState
+  const { authenticated, userInfo, currentUser } = props.authState
   useEffect(() => {
+    // eslint-disable-next-line
     if (authenticated === true) {
-      props.getuserGallery(props.authState.currentUser.id)
-      props.fetchUserDrawings(props.authState.currentUser.id)
-      props.fetchProfileData(props.authState.currentUser.id)
+      props.fetchUserGallery(currentUser.id)
+      props.fetchUserDrawings(currentUser.id)
+      props.fetchProfileData(currentUser.id)
     }
   }, [])
 
   return (
     <div className="profile">
+      <div className="profile-cover"></div>
       <div className="user-info">
         <ProfileCard
-          userInfo={props.authState.userInfo}
+          userInfo={userInfo}
           drawings={drawings}
           userGalleries={userGalleries}
         />

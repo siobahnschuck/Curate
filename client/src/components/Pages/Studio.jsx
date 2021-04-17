@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch) => {
 
     verified: (token) => dispatch(verifySession(token)),
 
-    getuserGallery: (id) => dispatch(getUserGallery(id))
+    fetchUserGallery: (id) => dispatch(getUserGallery(id))
   }
 }
 
@@ -42,14 +42,15 @@ const Studio = (props) => {
   const { userGalleries } = props.galleryState
   const { coordinates, fileName, isDrawing, galleryId } = props.drawState
   const { currentUser, authenticated } = props.authState
-  const { addNewDrawing, setFileName, SetGalleryId, isADrawing, setNewCoordinates, getuserGallery } = props
+  const { addNewDrawing, setFileName, SetGalleryId, isADrawing, setNewCoordinates, fetchUserGallery } = props
 
   useEffect(() => {
-    if (authenticated === true) {
-      getuserGallery(currentUser.id)
-    }
+    console.log('useEffect studio firing')
     console.log(currentUser)
     console.log(userGalleries)
+    if (authenticated === true) {
+      fetchUserGallery(currentUser.id)
+    }
   }, [])
   const handleChange = (e) => {
     setFileName(e.target.value)

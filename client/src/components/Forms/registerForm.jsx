@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 // import '../../css/Form.css'
 import '../../css/Home.css'
+import '../../css/Form.css'
 
 
 const RegisterForm = (props) => {
@@ -63,7 +64,7 @@ const RegisterForm = (props) => {
           onChange={(e) => props.handleChange(e)}
           required
         />
-        <button type="submit" size="sm" variant="outline-info" className="reg-sign">Sign Up</button>
+        <button className="login-btn" type="submit">Sign Up</button>
       </form>
     </div>
   )

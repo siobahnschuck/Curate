@@ -17,6 +17,7 @@ import GalleryDetails from './components/gallery/GalleryDetails';
 import {connect} from 'react-redux'
 import {setAuthenticated, verifySession} from './store/actions/AuthActions'
 import { getGalleryDrawings, getUserGallery } from './store/actions/GalleryActions';
+import LoginForm from './components/Forms/loginForm';
 
 const mapStateToProps = ({authState, galleryState}) => {
   return { authState, galleryState }

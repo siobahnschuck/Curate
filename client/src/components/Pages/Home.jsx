@@ -30,9 +30,12 @@ const Home = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    registerForm.password === registerForm.confirmPassword ?
-      props.createNewUser(registerForm) : alert('Your password does not match')
-    props.addNewUser('', '')
+    if (registerForm.password === registerForm.confirmPassword) {
+      props.createNewUser(registerForm)
+      props.addNewUser('', '')
+    } else {
+      alert('Your password does not match')
+    }
   }
 
   const registerProps = { handleChange, handleSubmit, registerForm }

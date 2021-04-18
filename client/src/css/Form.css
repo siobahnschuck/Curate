@@ -83,3 +83,23 @@
 .brief {
   margin-bottom: 0;
 }
+
+/* LOGIN FORM  */
+.login-btn {
+  border: 1px solid #388697;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #388697;
+  margin-left: 1em;
+}
+
+.login-btn:hover {
+  background-color:#388697 ;
+  color: white;
+}
+
+.login-input {
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 2px;
+}

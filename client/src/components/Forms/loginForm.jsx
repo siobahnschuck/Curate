@@ -8,6 +8,7 @@ const LoginForm = (props) => {
       <p>LOGIN</p>
       <form onSubmit={(e) => props.handleLogin(e)}>
         <input
+          className="login-input"
           type="text"
           name="email"
           placeholder="email"
@@ -15,13 +16,14 @@ const LoginForm = (props) => {
           required
         />
         <input
+          className="login-input"
           type="password"
           name="password"
           placeholder="password"
           onChange={(e) => props.handleChangeLogin(e)}
           required
         />
-        <button variant="outline-success" type="submit">Login</button>
+        <button className="login-btn" variant="outline-success" type="submit">Login</button>
       </form>
     </div>
   )

@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { deleteDrawing, getDrawingById, setGalleryId, updateDrawing } from '../../store/actions/DrawingActions'
 import { useParams } from 'react-router'
 import { getUserGallery } from '../../store/actions/GalleryActions'
+import * as AiIcons from 'react-icons/ai'
+
 
 const mapStateToProps = ({ drawState, galleryState }) => {
   return { drawState, galleryState }
@@ -26,6 +28,7 @@ const DrawingDetails = (props) => {
   useEffect(() => {
     props.getDrawing(id)
     props.getuserGallery(selectedDrawing.user_id)
+    // eslint-disable-next-lines
   }, [])
 
   const handleSubmit = (e, id, update) => {
@@ -36,13 +39,13 @@ const DrawingDetails = (props) => {
     props.updateDrawingGallery(id, updated)
   }
   return (
-    <div>
-      <div>
-        <h2>INFO</h2>
-        <img src={selectedDrawing.image} alt="lgDrawing" width="400" />
-        <p>{selectedDrawing.filename}</p>
+    <div className="draw-deets-container">
+      <h2 className="draw-deets-title">DRAWING DETAILS</h2>
+      <img className="deet-drawing" src={selectedDrawing.image} alt="lgDrawing" width="400" />
+      <div className="draw-deets-info">
+        <h3>{selectedDrawing.filename}</h3>
         <p>Created on: {selectedDrawing.created_at}</p>
-        <p>Change Gallery:
+        <h4>Change Gallery:
           <form onSubmit={(e) => handleSubmit(e, selectedDrawing.id, parseInt(galleryId))}>
             <select onChange={(e) => props.getId(e.target.value)}>
               {userGalleries[0].map((gal) => (
@@ -54,10 +57,10 @@ const DrawingDetails = (props) => {
                 </option>
               ))}
             </select>
-            <button>SAVE</button>
+            <button className="draw-btn"><AiIcons.AiFillSave /></button>
+            <button className="draw-btn" onClick={() => props.deleteADrawing(selectedDrawing.id)}><AiIcons.AiTwotoneDelete /></button>
           </form>
-        </p>
-        <button onClick={() => props.deleteADrawing(selectedDrawing.id)}>Delete</button>
+        </h4>
       </div>
     </div>
   )

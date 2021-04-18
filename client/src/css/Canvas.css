@@ -1,5 +1,13 @@
+.studio {
+  display: grid;
+  grid-template-columns: 10% 1fr;
+  grid-template-rows: 10% 1fr;
+}
+
 .canvas {
   background-color: thistle;
+  z-index: 0;
+  grid-column: 1 /4 ;
 }
 
 .slider {
@@ -15,4 +23,16 @@
   -webkit-appearance: none;
   appearance: none;
   background: #f0590d;
+}
+
+.toolbar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  z-index: 1;
+  grid-column: 1/2;
+  grid-row: 2/3;
+  align-self: start;
+  justify-self: start;
 }

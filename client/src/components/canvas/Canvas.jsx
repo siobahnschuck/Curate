@@ -94,18 +94,15 @@ const Canvas = (props) => {
 
   return (
     <div>
-      <canvas
-        className="canvas"
-        height={window.innerHeight * 2}
-        width={window.innerWidth * 2}
-        style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px` }}
-        onMouseDown={startDrawing}
-        onMouseUp={finishDrawing}
-        onMouseMove={draw}
-        ref={canvasRef}
-      />
-      <div>
-        <Tippy interactive={true} placement={'top'} content={
+
+      <div className="toolbar">
+        <ToggleButtonGroup onChange={(e) => props.SetPen(e)} size="sm" type="radio" name="options" defaultValue={"round"}>
+          <ToggleButton variant="outline-info" value={"round"}>Round </ToggleButton>
+          <ToggleButton variant="outline-info" value={"butt"}>Flat </ToggleButton>
+          <ToggleButton variant="outline-info" value={"square"}>Square </ToggleButton>
+        </ToggleButtonGroup>
+        <input onChange={(e) => onSlide(e.target.value)} value={props.thickness} className="slider" type="range" min="1" max="50" />
+        <Tippy interactive={true} placement={'right'} content={
           <CirclePicker
             color={props.colorHexCode}
             onChangeComplete={color => props.SetColor(color.hex)}
@@ -113,12 +110,6 @@ const Canvas = (props) => {
         }>
           <Button size="sm" variant="outline-info" >Select Color</Button>
         </Tippy>
-        <ToggleButtonGroup onChange={(e) => props.SetPen(e)} size="sm" type="radio" name="options" defaultValue={"round"}>
-          <ToggleButton variant="outline-info" value={"round"}>Round </ToggleButton>
-          <ToggleButton variant="outline-info" value={"butt"}>Flat </ToggleButton>
-          <ToggleButton variant="outline-info" value={"square"}>Square </ToggleButton>
-        </ToggleButtonGroup>
-        <input onChange={(e) => onSlide(e.target.value)} value={props.thickness} className="slider" type="range" min="1" max="50" />
         <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button>
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         {props.authenticated ? <form onSubmit={saveDrawing}>
@@ -145,6 +136,16 @@ const Canvas = (props) => {
         </Alert>
         <div />
       </div>
+      <canvas
+        className="canvas"
+        height={window.innerHeight * 2}
+        width={window.innerWidth * 2}
+        style={{ width: `${window.innerWidth}px`, height: `${window.innerHeight}px` }}
+        onMouseDown={startDrawing}
+        onMouseUp={finishDrawing}
+        onMouseMove={draw}
+        ref={canvasRef}
+      />
     </div>
   )
 }

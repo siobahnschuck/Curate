@@ -1,3 +1,6 @@
+
+/* REGISTER FORM */
+
 .register-container {
   display: flex;
   flex-direction: column;
@@ -7,28 +10,41 @@
   background-color: teal;
 }
 
-.edit-prof-container {
+/* EDIT PROFILE FORM */
+
+.edit-prof-container, .gallery-form-container {
+  display: grid;
+  grid-template-rows: 10% 1fr;
+  align-content: center;
+  justify-content: center;
   width: 100vw;
   height: 100vh;
+  background: linear-gradient(to bottom, #f6f4f3 11%, #388697 100%);
 }
 
-.edit-container {
+.edit-prof-title, .gallery-form-title {
+  align-self: end;
+}
+
+.edit-container{
   display: flex;
   flex-direction: column;
   width: 50vw;
   align-content: center;
   justify-content: center;
-  margin-top: 2em;
-  margin: 2em 4em;
 }
 
 .edit-btn {
   width: 20vw;
-  float: right;
   border-radius: 5px;
   border: none;
   background-color: #388697;
   color: white;
+}
+
+.edit-btn:hover {
+  background-color: #f6f4f3;
+  color: black;
 }
 
 .edit-input-bio {
@@ -36,12 +52,34 @@
   border-radius: 10px;
   margin: 1em;
 }
-.edit-input {
+.edit-input, .gal-input, .gal-input-description  {
   border-radius: 10px;
   margin: 1em;
 }
 
-.edit-input::placeholder, .edit-input-bio::placeholder {
+.edit-input::placeholder, 
+.edit-input-bio::placeholder, 
+.gal-input::placeholder,
+.gal-input-description::placeholder {
   text-align: center;
   color: black;
+}
+
+/* CREATE GALLERY FORM  */
+
+.gal-form {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  height: 30vh;
+  margin-top: 1em;
+}
+
+.gal-input-description {
+  height: 10vh;
+}
+
+.brief {
+  margin-bottom: 0;
 }

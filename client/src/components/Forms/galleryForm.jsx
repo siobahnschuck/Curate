@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const GalleryForm = (props) => {
   const { newGallery } = props.galleryState
-  const {currentUser} = props.authState
+  const { currentUser } = props.authState
   const handleChange = (e) => {
     props.addAGallery(e.target.name, e.target.value)
   }
@@ -27,24 +27,28 @@ const GalleryForm = (props) => {
     props.addAGallery('')
   }
   return (
-    <div>
-      Gallery
-      <form>
+    <div className="gallery-form-container">
+      <h1 className="gallery-form-title" >CREATE A NEW GALLERY</h1>
+      <form className="gal-form">
+        <p className="brief">What will you call this collection?</p>
         <input
+          className="gal-input"
           type="text"
           name="exhibition_title"
           placeholder="exhibition title"
           value={newGallery.exhibition_title}
           onChange={(e) => handleChange(e)}
         />
+        <p className="brief">A brief description</p>
         <input
+          className="gal-input-description"
           type="text"
           name="description"
           placeholder="description"
           value={newGallery.description}
           onChange={(e) => handleChange(e)}
         />
-        <button onClick={(e) => handleSubmit(e)}>Submit</button>
+        <button className="edit-btn" onClick={(e) => handleSubmit(e)}>save</button>
       </form>
     </div>
   )

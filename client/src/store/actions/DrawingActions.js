@@ -19,7 +19,8 @@ import {
   SELECTED_DRAWING,
   SET_GALLERY_ID,
   SET_COLOR,
-  SET_THICK
+  SET_THICK,
+  SET_PEN_TYPE
 } from '../types'
 
 //GET METHODS
@@ -146,4 +147,9 @@ export const setColor = (color) => ({
 export const setThick = (size) => ({
   type: SET_THICK,
   payload: size
+})
+
+export const setPenType = (pen) => ({
+  type: SET_PEN_TYPE,
+  payload: pen
 })

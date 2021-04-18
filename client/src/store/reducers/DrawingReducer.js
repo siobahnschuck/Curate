@@ -9,7 +9,8 @@ const {
   IS_COVER,
   SELECTED_DRAWING, 
   SET_GALLERY_ID, 
-  SET_COLOR, SET_THICK
+  SET_COLOR, SET_THICK,
+  SET_PEN_TYPE
 } = require('../types.js')
 
 const iState = {
@@ -21,7 +22,8 @@ const iState = {
   isCover: false,
   galleryId:0,
   colorHexCode: '#000000',
-  thickness: 1
+  thickness: 1,
+  penType: "round"
 }
 
 const DrawingReducer = (state= iState, action) => {
@@ -53,6 +55,8 @@ const DrawingReducer = (state= iState, action) => {
       return {...state, colorHexCode: action.payload}
     case SET_THICK:
       return {...state, thickness: action.payload}
+    case SET_PEN_TYPE:
+      return {...state, penType: action.payload}
     default:
       return {...state}
   }

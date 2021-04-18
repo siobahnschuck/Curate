@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Alert, Button } from 'react-bootstrap'
-import { BlockPicker } from 'react-color'
+import { Alert, Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap'
+import { CirclePicker } from 'react-color'
 import { Link } from 'react-router-dom'
 import Tippy from '@tippyjs/react'
 import '../../css/Canvas.css'
@@ -24,7 +24,7 @@ const Canvas = (props) => {
 
   useEffect(() => {
     tools()
-  }, [props.colorHexCode, props.thickness])
+  }, [props.colorHexCode, props.thickness, props.penType])
 
   const startDrawing = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
@@ -49,7 +49,7 @@ const Canvas = (props) => {
   }
 
   const tools = () => {
-    contextRef.current.lineCap = 'square'
+    contextRef.current.lineCap = props.penType
     contextRef.current.strokeStyle = props.colorHexCode
     contextRef.current.lineWidth = parseInt(props.thickness)
   }
@@ -106,15 +106,18 @@ const Canvas = (props) => {
       />
       <div>
         <Tippy interactive={true} placement={'top'} content={
-          <BlockPicker
+          <CirclePicker
             color={props.colorHexCode}
             onChangeComplete={color => props.SetColor(color.hex)}
           />
         }>
-          <Button>Select Color</Button>
+          <Button size="sm" variant="outline-info" >Select Color</Button>
         </Tippy>
-        {/* <Button size="sm" variant="outline-danger" onClick={mode = "pen"}>pen</Button>
-        <Button size="sm" variant="outline-danger" onClick={mode = "eraser"}>eraser</Button> */}
+        <ToggleButtonGroup onChange={(e) => props.SetPen(e)} size="sm" type="radio" name="options" defaultValue={"round"}>
+          <ToggleButton variant="outline-info" value={"round"}>Round </ToggleButton>
+          <ToggleButton variant="outline-info" value={"butt"}>Flat </ToggleButton>
+          <ToggleButton variant="outline-info" value={"square"}>Square </ToggleButton>
+        </ToggleButtonGroup>
         <input onChange={(e) => onSlide(e.target.value)} value={props.thickness} className="slider" type="range" min="1" max="50" />
         <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button>
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>

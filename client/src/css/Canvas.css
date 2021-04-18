@@ -2,6 +2,17 @@
   background-color: thistle;
 }
 
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #f0590d;
+  border-radius: 20px;
+  opacity: .7;
+  transition: opacity .2s;
+}
+
 .slider::-ms-thumb, .slider::-moz-range-thumb, .slider::-webkit-slider-thumb {
-  color: #f0590d;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #f0590d;
 }

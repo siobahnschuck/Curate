@@ -12,7 +12,8 @@ import {
   setFilename,
   setGalleryId,
   setColor,
-  setThick
+  setThick,
+  setPenType
 } from '../../store/actions/DrawingActions'
 import { verifySession } from '../../store/actions/AuthActions'
 import { getUserGallery } from '../../store/actions/GalleryActions'
@@ -33,6 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     SetGalleryId: (value) => dispatch(setGalleryId(value)),
     SetColor: (color) => dispatch(setColor(color)),
     SetThick: (size) => dispatch(setThick(size)),
+    SetPen: (pen) => dispatch(setPenType(pen)),
     // updateDrawingGallery: (id, update) => dispatch(updateDrawing(id, update)),
 
     verified: (token) => dispatch(verifySession(token)),
@@ -44,11 +46,11 @@ const mapDispatchToProps = (dispatch) => {
 
 const Studio = (props) => {
   const { userGalleries } = props.galleryState
-  const { coordinates, fileName, isDrawing, galleryId, colorHexCode, thickness } = props.drawState
+  const { coordinates, fileName, isDrawing, galleryId, colorHexCode, thickness, penType } = props.drawState
   const { currentUser, authenticated } = props.authState
   const { addNewDrawing, setFileName, SetGalleryId,
     isADrawing, setNewCoordinates, fetchUserGallery,
-    SetColor, SetThick } = props
+    SetColor, SetThick, SetPen } = props
 
   useEffect(() => {
     console.log('useEffect studio firing')
@@ -62,7 +64,7 @@ const Studio = (props) => {
     setFileName(e.target.value)
   }
 
-  const canvasProps = { authenticated, galleryId, currentUser, userGalleries, isDrawing, coordinates, fileName, isADrawing, colorHexCode, thickness, addNewDrawing, setFileName, SetGalleryId, setNewCoordinates, SetColor, SetThick, handleChange }
+  const canvasProps = { authenticated, galleryId, currentUser, userGalleries, isDrawing, coordinates, fileName, isADrawing, colorHexCode, thickness, penType, addNewDrawing, setFileName, SetGalleryId, setNewCoordinates, SetColor, SetThick, SetPen, handleChange }
   return (
     <div className='studio'>
       <div className="canvas-container">

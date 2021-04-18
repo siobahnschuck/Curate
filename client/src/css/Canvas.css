@@ -13,7 +13,7 @@
 .slider {
   -webkit-appearance: none;
   appearance: none;
-  background: #f0590d;
+  background: #e59500;
   border-radius: 20px;
   opacity: .7;
   transition: opacity .2s;
@@ -23,6 +23,10 @@
   -webkit-appearance: none;
   appearance: none;
   background: #f0590d;
+}
+
+.slider:hover {
+  background: #e0a840;
 }
 
 .toolbar {
@@ -35,4 +39,38 @@
   grid-row: 2/3;
   align-self: start;
   justify-self: start;
+  margin: .5em;
+}
+
+.save-as {
+  border: none;
+  background-color: #388697;
+  border-radius: 5px;
+}
+
+.save-as::placeholder {
+  color: white;
+}
+
+.save-as:hover {
+  background-color: #59b4c9;
+}
+
+.canvas-dropdown {
+  border: none;
+  background-color: #e59500;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.canvas-dropdown:hover {
+  background-color: #e0a840;
+}
+
+.canvas-save-btn {
+  width:100%;
+}
+
+.picker:hover {
+  outline: none;
 }

@@ -104,6 +104,7 @@ const Canvas = (props) => {
         <input onChange={(e) => onSlide(e.target.value)} value={props.thickness} className="slider" type="range" min="1" max="50" />
         <Tippy interactive={true} placement={'right'} content={
           <CirclePicker
+            className="picker"
             color={props.colorHexCode}
             onChangeComplete={color => props.SetColor(color.hex)}
           />
@@ -113,10 +114,10 @@ const Canvas = (props) => {
         <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button>
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         {props.authenticated ? <form onSubmit={saveDrawing}>
-          <input type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
+          <input className="save-as" type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />
           {props.userGalleries[0] ?
             props.userGalleries[0].length ?
-              <select onChange={(e) => props.SetGalleryId(e.target.value)}>
+              <select className="canvas-dropdown" onChange={(e) => props.SetGalleryId(e.target.value)}>
                 <option>Select a Gallery</option>
                 {props.userGalleries[0].map((gal) => (
                   <option key={gal.id} value={gal.id}>
@@ -125,7 +126,7 @@ const Canvas = (props) => {
                 ))}
               </select>
               : <Link to="/create/gallery">Create A Gallery</Link> : null}
-          {!show && <Button size="sm" variant="outline-info" onClick={saveDrawing}>save</Button>}
+          {!show && <Button className="canvas-save-btn" size="sm" variant="outline-info" onClick={saveDrawing}>save</Button>}
         </form> : null}
         <Alert show={show} variant="success">
           <Alert.Heading>Drawing Saved</Alert.Heading>

@@ -49,13 +49,13 @@ const UserGallery = (props) => {
   const { drawings } = props.drawState
   const { authenticated, userInfo, currentUser } = props.authState
   useEffect(() => {
-    // eslint-disable-next-line
-    if (authenticated === true) {
+    if (authenticated) {
       props.fetchUserGallery(currentUser.id)
       props.fetchUserDrawings(currentUser.id)
       props.fetchProfileData(currentUser.id)
     }
-  }, [])
+    // eslint-disable-next-line
+  }, [props.drawState.newDrawings])
 
   return (
     <div className="profile">

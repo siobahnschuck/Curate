@@ -15,6 +15,7 @@ const {
 
 const iState = {
   drawings: [],
+  newDrawings: [],
   selectedDrawing: [],
   isDrawing: false, 
   coordinates: [],
@@ -44,9 +45,10 @@ const DrawingReducer = (state= iState, action) => {
     case SET_GALLERY_ID:
       return {...state, galleryId: action.payload}
     case GET_USER_DRAWING:
-      return {...state, drawings: [...state.drawings, action.payload]}
+      state.drawings.push(action.payload)
+      return {...state}    
     case CREATE_DRAWING:
-      return {...state}
+      return {...state, newDrawings: action.payload }
     case DELETE_DRAWING:
       return {...state}
     case UPDATE_DRAWING:

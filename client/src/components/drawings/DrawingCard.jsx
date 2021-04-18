@@ -14,9 +14,9 @@ const DrawingCard = (props) => {
 
   return (
     <div >
-      <h2 className="draw-title">{props.drawings.length ? props.drawings[0].length : 0} Drawings</h2>
+      <h2 className="draw-title">{props.drawings.length ? props.drawings[props.drawings.length - 1].length : 0} Drawings</h2>
       <div className="drawing-card">
-        {props.drawings.length ? props.drawings[0].map((drawing) => (
+        {props.drawings.length ? props.drawings[props.drawings.length - 1].map((drawing) => (
           <div className="drawing-con" key={drawing.id}>
             <img className="drawing" src={drawing.image} alt="drawing" />
             <button className="draw-btns" onClick={() => handleEdit(drawing.id)}><CgMoreO /></button>

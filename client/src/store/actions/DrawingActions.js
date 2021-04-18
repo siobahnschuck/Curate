@@ -40,6 +40,7 @@ export const getDrawings = () => async (dispatch) => {
 export const getUserDrawings = (id) => async (dispatch) => {
   try {
     const drawings = await GetUserDrawings(id)
+    console.log(drawings)
     dispatch({
       type: GET_USER_DRAWING,
       payload: drawings
@@ -64,11 +65,17 @@ export const getDrawingById = (id) => async (dispatch) => {
 //POST METHODS
 export const createDrawing = (body) => async (dispatch) => {
   try {
+
     const newDrawing = await CreateDrawing(body)
+    console.log(newDrawing)
     dispatch({
       type: CREATE_DRAWING,
       payload: newDrawing
     })
+    // dispatch({
+    //   type: GET_USER_DRAWING,
+    //   payload: newDrawing
+    // })
   } catch (error) {
     throw error
   }

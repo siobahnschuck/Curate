@@ -4,6 +4,7 @@ import { CirclePicker } from 'react-color'
 import { Link } from 'react-router-dom'
 import Tippy from '@tippyjs/react'
 import '../../css/Canvas.css'
+import { setColor } from '../../store/actions/DrawingActions'
 
 const Canvas = (props) => {
   const [show, setShow] = useState(false)
@@ -52,6 +53,14 @@ const Canvas = (props) => {
     contextRef.current.lineCap = props.penType
     contextRef.current.strokeStyle = props.colorHexCode
     contextRef.current.lineWidth = parseInt(props.thickness)
+  }
+
+  const ranColor = () => {
+    let r = Math.random() * 255
+    let g = Math.random() * 255
+    let b = Math.random() * 255
+    let a = Math.random() * 1
+    return props.SetColor(`rgb(${r}, ${g}, ${b}, ${a})`)
   }
 
   const clearDrawing = () => {
@@ -111,6 +120,7 @@ const Canvas = (props) => {
         }>
           <Button size="sm" variant="outline-info" >Select Color</Button>
         </Tippy>
+        <Button size='sm' variant="outline-info" onClick={ranColor}>Random Color</Button>
         <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button>
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         {props.authenticated ? <form onSubmit={saveDrawing}>

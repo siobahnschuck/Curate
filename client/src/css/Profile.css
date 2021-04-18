@@ -11,7 +11,12 @@
   display:grid;
   grid-template-columns: 1fr 1fr 1fr;
   background: linear-gradient(to bottom, #388697 29%, #ffffff 100%);
+}
 
+.drawing-cards {
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #F6F4F3;
 }
 
 .gallery-card {
@@ -97,8 +102,12 @@
 
 .draw-title {
   margin: 2em 0 0  2em;
-  border-top: 4px solid black;
+  border-top: 4px solid rgb(136, 130, 130);
   border-radius: 5px;
+}
+
+.prof-button-draw {
+  justify-self: center;
 }
 
 /* GALLERY */
@@ -108,7 +117,7 @@
   grid-row: 2/3;
   grid-column: 2/3;
   width: 65vw;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid rgb(136, 130, 130);
   border-radius: 5px;
 }
 
@@ -123,6 +132,8 @@
   border: 1px solid #b8b5b4;
   border-radius: 10px;
   text-align: center;
+  background-color: #9e2b2575;
+
 }
 
 /* GALLERY DETAILS */

@@ -15,7 +15,7 @@ const DrawingCard = (props) => {
   return (
     <div >
       <h2 className="draw-title">{props.drawings.length ? props.drawings[props.drawings.length - 1].length : 0} Drawings</h2>
-      <div className="drawing-card">
+      <div className="drawing-cards">
         {props.drawings.length ? props.drawings[props.drawings.length - 1].map((drawing) => (
           <div className="drawing-con" key={drawing.id}>
             <img className="drawing" src={drawing.image} alt="drawing" />

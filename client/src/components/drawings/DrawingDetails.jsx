@@ -57,8 +57,10 @@ const DrawingDetails = (props) => {
               </option>
             ))}
           </select>
-          <button className="draw-btn"><AiIcons.AiFillSave /></button>
-          <button className="draw-btn" onClick={() => props.deleteADrawing(selectedDrawing.id)}><AiIcons.AiTwotoneDelete /></button>
+          <div className="prof-button-draw">
+            <button className="draw-btn"><AiIcons.AiFillSave /></button>
+            <button className="draw-btn" onClick={() => props.deleteADrawing(selectedDrawing.id)}><AiIcons.AiTwotoneDelete /></button>
+          </div>
         </form>
 
       </div>

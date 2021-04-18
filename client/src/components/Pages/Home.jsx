@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import RegisterForm from '../Forms/registerForm'
-import logo from '../../imgs/logo_400px.png'
+import logo from '../../imgs/currate_full-01.png'
 import '../../css/Home.css'
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -38,8 +38,8 @@ const Home = (props) => {
   const registerProps = { handleChange, handleSubmit, registerForm }
   return (
     <div className="home">
-      <h1 className="home-title">CURATE</h1>
-      <img className="home-logo" src={logo} width="200" alt="logo" />
+      <img className="home-logo" src={logo} width="600" alt="logo" />
+      <h3 className="home-title">a digital art gallery created by its users</h3>
       <div className="home-register">
         <RegisterForm {...registerProps} />
       </div>

@@ -44,23 +44,23 @@ const DrawingDetails = (props) => {
       <img className="deet-drawing" src={selectedDrawing.image} alt="lgDrawing" width="400" />
       <div className="draw-deets-info">
         <h3>{selectedDrawing.filename}</h3>
-        <p>Created on: {selectedDrawing.created_at}</p>
-        <h4>Change Gallery:
-          <form onSubmit={(e) => handleSubmit(e, selectedDrawing.id, parseInt(galleryId))}>
-            <select onChange={(e) => props.getId(e.target.value)}>
-              {userGalleries[0].map((gal) => (
-                <option
-                  key={gal.id}
-                  value={gal.id}
-                >
-                  {gal.exhibition_title}
-                </option>
-              ))}
-            </select>
-            <button className="draw-btn"><AiIcons.AiFillSave /></button>
-            <button className="draw-btn" onClick={() => props.deleteADrawing(selectedDrawing.id)}><AiIcons.AiTwotoneDelete /></button>
-          </form>
-        </h4>
+        <p>Created on: {selectedDrawing.created_at.split(' ')[0]}</p>
+        <h3>Change Gallery:</h3>
+        <form onSubmit={(e) => handleSubmit(e, selectedDrawing.id, parseInt(galleryId))}>
+          <select className="draw-gal-form" onChange={(e) => props.getId(e.target.value)}>
+            {userGalleries[0].map((gal) => (
+              <option
+                key={gal.id}
+                value={gal.id}
+              >
+                {gal.exhibition_title}
+              </option>
+            ))}
+          </select>
+          <button className="draw-btn"><AiIcons.AiFillSave /></button>
+          <button className="draw-btn" onClick={() => props.deleteADrawing(selectedDrawing.id)}><AiIcons.AiTwotoneDelete /></button>
+        </form>
+
       </div>
     </div>
   )

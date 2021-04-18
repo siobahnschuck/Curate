@@ -179,3 +179,8 @@
   align-self: center;
   justify-self: center;
 }
+
+.draw-gal-form {
+  outline: none;
+  border: none;
+}

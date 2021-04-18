@@ -59,6 +59,7 @@ const ProfileNav = (props) => {
             <Nav.Link><NavLink className="nav-item" to="/"><FaIcons.FaHome /> Home</NavLink></Nav.Link>
             <Nav.Link><NavLink className="nav-item" to="/studio"><FaIcons.FaPaintBrush /> Studio</NavLink></Nav.Link>
             <Nav.Link><NavLink className="nav-item" to="/explore"><FaIcons.FaGlobeAmericas /> Explore</NavLink></Nav.Link>
+            <Nav.Link><NavLink className="nav-item" to="/about"><FaIcons.FaInfoCircle /> About</NavLink></Nav.Link>
           </Nav>
           {authenticated ? <NavDropdown title="Profile" id="drop-down" >
             <NavDropdown.Item><NavLink to="/edit"><FaIcons.FaUserEdit /> Edit Profile</NavLink></NavDropdown.Item>
@@ -79,7 +80,6 @@ const ProfileNav = (props) => {
               <Button variant="outline-danger" onClick={handleClose}>Close</Button>
             </Modal.Footer>
           </Modal>
-
         </Nav>
       </Navbar>
     </IconContext.Provider >

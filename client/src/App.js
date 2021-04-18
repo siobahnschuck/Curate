@@ -6,6 +6,7 @@ import Home from './components/Pages/Home'
 import Studio from './components/Pages/Studio'
 import Explore from './components/Pages/Explore'
 import UserGallery from './components/Pages/User_Gallery';
+import About from './components/Pages/About'
 import ProfileForm from './components/Forms/profileForm'
 // import Navbar from './components/navbar/Navbar';
 import ProfileNav from './components/navbar/ProfileNav'
@@ -71,8 +72,8 @@ function App(props) {
       <Route path='/profile'
         render={() => (<UserGallery/>)}
       />
-      <Route path='/explore'
-        render={() => (<Explore/>)}
+      <Route path='/about'
+        render={() => (<About/>)}
       />
       <Route path='/edit'
         render={() => (<ProfileForm/>)}

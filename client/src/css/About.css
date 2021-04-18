@@ -1,0 +1,24 @@
+.about {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 10% 1fr 10%;
+  height: 100vh;
+}
+
+.about-body {
+  width: 50vw;
+  grid-column: 2/3;
+  grid-row: 2/3;
+  /* justify-self: start; */
+  align-self: center;
+}
+
+.full-logo {
+  grid-column: 1/3;
+  justify-self: center;
+  /* height: 20vh; */
+}
+
+footer {
+  grid-row: 3/4;
+}

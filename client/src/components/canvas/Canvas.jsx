@@ -4,7 +4,6 @@ import { CirclePicker } from 'react-color'
 import { Link } from 'react-router-dom'
 import Tippy from '@tippyjs/react'
 import '../../css/Canvas.css'
-import { setColor } from '../../store/actions/DrawingActions'
 
 const Canvas = (props) => {
   const [show, setShow] = useState(false)
@@ -63,17 +62,20 @@ const Canvas = (props) => {
     return props.SetColor(`rgb(${r}, ${g}, ${b}, ${a})`)
   }
 
+  // const emojiPen = ({ nativeEvent }) => {
+  //   const { offsetX, offsetY } = nativeEvent
+  //   let counter = 0
+  //   if (!props.isDrawing) {
+  //     return
+  //   }
+  //   counter < 2 ? counter += 1 : counter = 0
+  //   counter === 1 ? contextRef.current.stroke(P) : contextRef.current.stroke(HEART)
+  //   counter === 0 ? contextRef.current.stroke(STAR) : contextRef.current.stroke(P)
+  // }
+
   const clearDrawing = () => {
     contextRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
     props.setNewCoordinates("")
-  }
-
-  // const eraser = () => {
-  // }
-
-  const undo = () => {
-    // let coordClone = [].concat(props.coordinates)
-    return props.coordinates.pop()
   }
 
   const onSlide = (val) => {
@@ -87,7 +89,7 @@ const Canvas = (props) => {
     for (var i = 0; i < bs.length; i++) {
       ba[i] = bs.charCodeAt(i);
     }
-    return new Blob([ba], { type: "image/png" });
+    return new Blob([ba], { type: "stroke/png" });
   }
 
   const saveDrawing = async (e) => {
@@ -95,8 +97,8 @@ const Canvas = (props) => {
     console.log(props.userGalleries)
     let id = props.currentUser.id
     let galleryId = props.galleryId
-    const save = canvasRef.current.toDataURL('image/png')
-    let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
+    const save = canvasRef.current.toDataURL('stroke/png')
+    let blob = convertToBlob(save.replace("data:stroke/png;base64,", ""))
     await props.addNewDrawing(blob, props.fileName, props.coordinates, id, galleryId)
     await setShow(true)
   }
@@ -120,8 +122,9 @@ const Canvas = (props) => {
         }>
           <Button size="sm" variant="outline-info" >Select Color</Button>
         </Tippy>
+        {/* <Button size='sm' variant="outline-info" onClick={emojiPen}>Emoji Pen</Button> */}
         <Button size='sm' variant="outline-info" onClick={ranColor}>Random Color</Button>
-        <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button>
+        {/* <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button> */}
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         {props.authenticated ? <form onSubmit={saveDrawing}>
           <input className="save-as" type="text" value={props.fileName} placeholder="save as" onChange={(e) => props.handleChange(e)} />

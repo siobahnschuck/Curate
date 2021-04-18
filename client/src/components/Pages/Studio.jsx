@@ -59,6 +59,7 @@ const Studio = (props) => {
     if (authenticated === true) {
       fetchUserGallery(currentUser.id)
     }
+    // eslint-disable-next-line
   }, [])
   const handleChange = (e) => {
     setFileName(e.target.value)

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { addUser, addLogin, createUser, createLogin, setAuthenticated, verifySession } from '../../store/actions/AuthActions'
 import { Alert } from 'react-bootstrap'
+import About from './About'
 
 const mapStateToProps = ({ authState }) => {
   return { authState }
@@ -42,6 +43,7 @@ const Home = (props) => {
       <div className="home-register">
         <RegisterForm {...registerProps} />
       </div>
+      {/* <About /> */}
     </div>
   )
 }

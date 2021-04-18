@@ -43,7 +43,6 @@ const Home = (props) => {
       <div className="home-register">
         <RegisterForm {...registerProps} />
       </div>
-      {/* <About /> */}
     </div>
   )
 }

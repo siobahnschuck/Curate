@@ -21,7 +21,7 @@ const LoginForm = (props) => {
           onChange={(e) => props.handleChangeLogin(e)}
           required
         />
-        <Button variant="outline-success" onSubmit={(e) => props.handleLogin(e)}>Login</Button>
+        <button variant="outline-success" type="submit">Login</button>
       </form>
     </div>
   )

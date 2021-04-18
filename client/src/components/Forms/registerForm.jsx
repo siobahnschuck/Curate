@@ -63,7 +63,7 @@ const RegisterForm = (props) => {
           onChange={(e) => props.handleChange(e)}
           required
         />
-        <Button size="sm" variant="outline-info" className="reg-sign">Sign Up</Button>
+        <button type="submit" size="sm" variant="outline-info" className="reg-sign">Sign Up</button>
       </form>
     </div>
   )

@@ -1,3 +1,7 @@
 .canvas {
   background-color: thistle;
 }
+
+.slider::-ms-thumb, .slider::-moz-range-thumb, .slider::-webkit-slider-thumb {
+  color: #f0590d;
+}

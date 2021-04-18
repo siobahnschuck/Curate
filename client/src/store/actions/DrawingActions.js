@@ -18,6 +18,8 @@ import {
   UPDATE_DRAWING,
   SELECTED_DRAWING,
   SET_GALLERY_ID,
+  SET_COLOR,
+  SET_THICK
 } from '../types'
 
 //GET METHODS
@@ -136,3 +138,12 @@ export const setGalleryId = (value) => ({
   payload: value
 })
 
+export const setColor = (color) => ({
+  type: SET_COLOR,
+  payload: color
+})
+
+export const setThick = (size) => ({
+  type: SET_THICK,
+  payload: size
+})

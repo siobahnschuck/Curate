@@ -10,7 +10,9 @@ import {
   deleteDrawing,
   setCoordinates,
   setFilename,
-  setGalleryId
+  setGalleryId,
+  setColor,
+  setThick
 } from '../../store/actions/DrawingActions'
 import { verifySession } from '../../store/actions/AuthActions'
 import { getUserGallery } from '../../store/actions/GalleryActions'
@@ -29,6 +31,8 @@ const mapDispatchToProps = (dispatch) => {
     setNewCoordinates: (coordinates) => dispatch(setCoordinates(coordinates)),
     setFileName: (fileName) => dispatch(setFilename(fileName)),
     SetGalleryId: (value) => dispatch(setGalleryId(value)),
+    SetColor: (color) => dispatch(setColor(color)),
+    SetThick: (size) => dispatch(setThick(size)),
     // updateDrawingGallery: (id, update) => dispatch(updateDrawing(id, update)),
 
     verified: (token) => dispatch(verifySession(token)),
@@ -40,9 +44,11 @@ const mapDispatchToProps = (dispatch) => {
 
 const Studio = (props) => {
   const { userGalleries } = props.galleryState
-  const { coordinates, fileName, isDrawing, galleryId } = props.drawState
+  const { coordinates, fileName, isDrawing, galleryId, colorHexCode, thickness } = props.drawState
   const { currentUser, authenticated } = props.authState
-  const { addNewDrawing, setFileName, SetGalleryId, isADrawing, setNewCoordinates, fetchUserGallery } = props
+  const { addNewDrawing, setFileName, SetGalleryId,
+    isADrawing, setNewCoordinates, fetchUserGallery,
+    SetColor, SetThick } = props
 
   useEffect(() => {
     console.log('useEffect studio firing')
@@ -56,7 +62,7 @@ const Studio = (props) => {
     setFileName(e.target.value)
   }
 
-  const canvasProps = { authenticated, galleryId, currentUser, userGalleries, isDrawing, coordinates, fileName, isADrawing, addNewDrawing, setFileName, SetGalleryId, setNewCoordinates, handleChange }
+  const canvasProps = { authenticated, galleryId, currentUser, userGalleries, isDrawing, coordinates, fileName, isADrawing, colorHexCode, thickness, addNewDrawing, setFileName, SetGalleryId, setNewCoordinates, SetColor, SetThick, handleChange }
   return (
     <div className='studio'>
       <div className="canvas-container">

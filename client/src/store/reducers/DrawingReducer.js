@@ -8,7 +8,8 @@ const {
   UPDATE_DRAWING,
   IS_COVER,
   SELECTED_DRAWING, 
-  SET_GALLERY_ID
+  SET_GALLERY_ID, 
+  SET_COLOR, SET_THICK
 } = require('../types.js')
 
 const iState = {
@@ -18,7 +19,9 @@ const iState = {
   coordinates: [],
   fileName: "", 
   isCover: false,
-  galleryId:0
+  galleryId:0,
+  colorHexCode: '#000000',
+  thickness: 1
 }
 
 const DrawingReducer = (state= iState, action) => {
@@ -46,6 +49,10 @@ const DrawingReducer = (state= iState, action) => {
       return {...state}
     case UPDATE_DRAWING:
       return {...state}
+    case SET_COLOR:
+      return {...state, colorHexCode: action.payload}
+    case SET_THICK:
+      return {...state, thickness: action.payload}
     default:
       return {...state}
   }

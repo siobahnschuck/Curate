@@ -1,18 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Alert, Button } from 'react-bootstrap'
-import { SliderPicker } from 'react-color'
+import { BlockPicker } from 'react-color'
 import { Link } from 'react-router-dom'
+import Tippy from '@tippyjs/react'
 import '../../css/Canvas.css'
 
 const Canvas = (props) => {
   const [show, setShow] = useState(false)
-  const [colorHexCode, setColorHexCode] = useState('#000000')
   const canvasRef = useRef(null)
   const contextRef = useRef(null)
-  // let mode = "pen"
 
   useEffect(() => {
-    console.log(props)
     const canvas = canvasRef.current
     canvas.width = window.innerWidth * 2
     canvas.height = window.innerHeight * 2
@@ -21,22 +19,17 @@ const Canvas = (props) => {
 
     const context = canvas.getContext('2d', { preserveDrawingBuffer: true })
     context.scale(2, 2)
-    context.lineCap = 'round'
-    context.strokeStyle = colorHexCode
-    context.lineWidth = 5
     contextRef.current = context
-
-    // let token = localStorage.getItem('token')
-    // if (token) {
-    //   props.verified(token)
-    // }
   }, [props.userGalleries])
+
+  useEffect(() => {
+    tools()
+  }, [props.colorHexCode, props.thickness])
 
   const startDrawing = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
     contextRef.current.beginPath()
     contextRef.current.moveTo(offsetX, offsetY)
-    console.log('start drawing', offsetX, offsetY)
     props.isADrawing(true)
   }
 
@@ -44,20 +37,21 @@ const Canvas = (props) => {
     contextRef.current.closePath()
     props.isADrawing(false)
   }
+
   const draw = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent
     if (!props.isDrawing) {
       return
     }
-    // if (mode === "pen") {
     contextRef.current.lineTo(offsetX, offsetY)
     contextRef.current.stroke()
     props.setNewCoordinates({ x: offsetX, y: offsetY })
-    // } else {
-    //   // contextRef.current.globalCompositeOperation = "destination-out"
-    //   // contextRef.current.arc(offsetX, offsetY, 8, 0, Math.PI * 2, false)
-    //   contextRef.current.fill()
-    // }
+  }
+
+  const tools = () => {
+    contextRef.current.lineCap = 'square'
+    contextRef.current.strokeStyle = props.colorHexCode
+    contextRef.current.lineWidth = parseInt(props.thickness)
   }
 
   const clearDrawing = () => {
@@ -71,6 +65,10 @@ const Canvas = (props) => {
   const undo = () => {
     // let coordClone = [].concat(props.coordinates)
     return props.coordinates.pop()
+  }
+
+  const onSlide = (val) => {
+    props.SetThick(val)
   }
 
   function convertToBlob(base64data) {
@@ -107,12 +105,17 @@ const Canvas = (props) => {
         ref={canvasRef}
       />
       <div>
-        <SliderPicker
-          color={colorHexCode}
-          onChangeComplete={color => setColorHexCode(color.hex)}
-        />
+        <Tippy interactive={true} placement={'top'} content={
+          <BlockPicker
+            color={props.colorHexCode}
+            onChangeComplete={color => props.SetColor(color.hex)}
+          />
+        }>
+          <Button>Select Color</Button>
+        </Tippy>
         {/* <Button size="sm" variant="outline-danger" onClick={mode = "pen"}>pen</Button>
         <Button size="sm" variant="outline-danger" onClick={mode = "eraser"}>eraser</Button> */}
+        <input onChange={(e) => onSlide(e.target.value)} value={props.thickness} className="slider" type="range" min="1" max="50" />
         <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button>
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         {props.authenticated ? <form onSubmit={saveDrawing}>

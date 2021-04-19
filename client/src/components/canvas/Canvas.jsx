@@ -89,7 +89,7 @@ const Canvas = (props) => {
     for (var i = 0; i < bs.length; i++) {
       ba[i] = bs.charCodeAt(i);
     }
-    return new Blob([ba], { type: "stroke/png" });
+    return new Blob([ba], { type: "image/png" });
   }
 
   const saveDrawing = async (e) => {
@@ -97,8 +97,8 @@ const Canvas = (props) => {
     console.log(props.userGalleries)
     let id = props.currentUser.id
     let galleryId = props.galleryId
-    const save = canvasRef.current.toDataURL('stroke/png')
-    let blob = convertToBlob(save.replace("data:stroke/png;base64,", ""))
+    const save = canvasRef.current.toDataURL('image/png')
+    let blob = convertToBlob(save.replace("data:image/png;base64,", ""))
     await props.addNewDrawing(blob, props.fileName, props.coordinates, id, galleryId)
     await setShow(true)
   }

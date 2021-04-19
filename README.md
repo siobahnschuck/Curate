@@ -61,9 +61,14 @@ otherwise click [here]() to check out the deployed site.
 
 ### **_Credits_**
 Inspiration: 
+
 Google's World Draw: [World Draw](https://world-draw.appspot.com/draw)
 
+
 Technical: 
+
 react-icons: [react icons](https://react-icons.github.io/react-icons)
+
 react-color: [react color](https://www.npmjs.com/package/react-color)
+
 AWS Image Hosting: [aws s3](https://aws.amazon.com/)

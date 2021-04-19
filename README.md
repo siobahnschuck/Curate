@@ -42,8 +42,8 @@ otherwise click [here]() to check out the deployed site.
 ## **_Application Images_**
 
 ### Final Design
+![home](./img/home.png)
 ![studio](./img/studio.png) 
-
 ---
 
 ### **_Future Updates_**

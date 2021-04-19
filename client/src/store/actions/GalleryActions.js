@@ -66,11 +66,12 @@ export const createGallery = (body) => async (dispatch) => {
 }
 
 export const deleteGallery = (id) => async (dispatch) => {
+  console.log(id)
   try {
-    const deleted = await DeleteGallery(id)
+    await DeleteGallery(id) 
     dispatch({
       type: DELETE_GALLERY,
-      payload: deleted
+      payload: id
     })
   } catch (error) {
     throw error

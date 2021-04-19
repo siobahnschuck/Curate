@@ -25,7 +25,6 @@ const GalleryForm = (props) => {
     e.preventDefault()
     let obj = { ...newGallery, user_id: currentUser.id }
     props.createNewGallery(obj)
-    props.addAGallery('')
     history.push('/profile')
   }
   return (

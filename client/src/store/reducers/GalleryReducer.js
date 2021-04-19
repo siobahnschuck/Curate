@@ -29,7 +29,9 @@ const GalleryReducer = (state=iState, action) => {
         }
       }
     case CREATE_GALLERY:
-      return {...state, userGalleries: [...state.userGalleries, state.newGallery]}
+      let iarray = state.userGalleries[0]
+      iarray.push(state.newGallery)
+      return {...state, userGalleries: [[...iarray]], newGallery: {exhibition_title: '', description: ''} }
     case GET_USER_GALLERY:
       return {...state, userGalleries: [action.payload]}
     case GET_ALL_GALLERY:
@@ -37,8 +39,8 @@ const GalleryReducer = (state=iState, action) => {
     case GET_GALLERY_DRAWINGS:
       return {...state, galleryDrawings: action.payload}
     case DELETE_GALLERY:
-      let filtered = state.userGalleries.filter((draw) => draw.id !== action.payload)
-      return {...state, userGalleries: filtered}
+      let filtered = state.userGalleries[0].filter((draw) => draw.id !== action.payload)
+      return {...state, userGalleries: [filtered]}
     case UPDATE_GALLERY:
       return {
         ...state,

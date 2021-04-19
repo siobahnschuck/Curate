@@ -39,7 +39,6 @@ const ProfileNav = (props) => {
     e.preventDefault()
     try {
       await props.createNewLogin(loginForm)
-      // localStorage.setItem('token', currentUser.token)
       props.SetAuthenticated(true)
       handleClose()
     } catch (error) {

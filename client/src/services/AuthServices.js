@@ -3,7 +3,6 @@ import Client from '.'
 export const Login = async (formData) => {
   try {
     const res = await Client.post(`/auth/login`, formData)
-    console.log(res.data)
     localStorage.setItem('token', res.data.token)
     return res.data.payload
   } catch (error) {

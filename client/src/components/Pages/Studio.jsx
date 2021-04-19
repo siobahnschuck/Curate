@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import Canvas from '../canvas/Canvas'
-// import DrawingTools from '../canvas/DrawingTools'
 import { connect } from 'react-redux'
 import {
   addDrawing,
@@ -35,7 +34,6 @@ const mapDispatchToProps = (dispatch) => {
     SetColor: (color) => dispatch(setColor(color)),
     SetThick: (size) => dispatch(setThick(size)),
     SetPen: (pen) => dispatch(setPenType(pen)),
-    // updateDrawingGallery: (id, update) => dispatch(updateDrawing(id, update)),
 
     verified: (token) => dispatch(verifySession(token)),
 
@@ -53,9 +51,6 @@ const Studio = (props) => {
     SetColor, SetThick, SetPen } = props
 
   useEffect(() => {
-    console.log('useEffect studio firing')
-    console.log(currentUser)
-    console.log(userGalleries)
     if (authenticated === true) {
       fetchUserGallery(currentUser.id)
     }

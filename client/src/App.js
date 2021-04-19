@@ -1,14 +1,12 @@
 import React, {useEffect} from 'react'
 import './css/App.css';
 import {Route, Switch} from 'react-router-dom'
-// import Header from './components/Pages/Header'
 import Home from './components/Pages/Home'
 import Studio from './components/Pages/Studio'
 import Explore from './components/Pages/Explore'
 import UserGallery from './components/Pages/User_Gallery';
 import About from './components/Pages/About'
 import ProfileForm from './components/Forms/profileForm'
-// import Navbar from './components/navbar/Navbar';
 import ProfileNav from './components/navbar/ProfileNav'
 import GalleryForm from './components/Forms/galleryForm';
 import DrawingDetails from './components/drawings/DrawingDetails';
@@ -17,7 +15,6 @@ import GalleryDetails from './components/gallery/GalleryDetails';
 import {connect} from 'react-redux'
 import {setAuthenticated, verifySession} from './store/actions/AuthActions'
 import { getGalleryDrawings, getUserGallery } from './store/actions/GalleryActions';
-import LoginForm from './components/Forms/loginForm';
 
 const mapStateToProps = ({authState, galleryState}) => {
   return { authState, galleryState }
@@ -55,8 +52,6 @@ function App(props) {
 
   return (
     <div className="App"> 
-    {/* <Header/> */}
-    {/* <Navbar />  */}
     <ProfileNav/>
     <Switch>
       <Route exact path='/' 

@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import RegisterForm from '../Forms/registerForm'
 import logo from '../../imgs/currate_full-01.png'
 import '../../css/Home.css'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
-import { addUser, addLogin, createUser, createLogin, setAuthenticated, verifySession } from '../../store/actions/AuthActions'
-import { Alert } from 'react-bootstrap'
+import { addUser, createUser, setAuthenticated } from '../../store/actions/AuthActions'
 import Footer from './Footer'
 
 const mapStateToProps = ({ authState }) => {
@@ -21,8 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 
 const Home = (props) => {
   const { registerForm } = props.authState
-  const [show, setShow] = useState(true)
-  const history = useHistory()
 
   const handleChange = (e) => {
     props.addNewUser(e.target.name, e.target.value)

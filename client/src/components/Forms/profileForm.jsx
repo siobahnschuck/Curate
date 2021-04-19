@@ -20,6 +20,7 @@ const ProfileForm = (props) => {
   const history = useHistory()
   useEffect(() => {
     props.fetchProfileData(currentUser.id)
+    //eslint-disable-next-lines
   }, [])
 
   const handleProfileChange = (e) => {

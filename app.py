@@ -9,16 +9,24 @@ from resources.auth import Login, Register, Profile, GalleryData, ProfileData
 from resources.drawing import Drawings, SingleDrawing, DeleteDrawing, DrawingDetails
 from resources.gallery import Galleries, SingleGallery
 from flask_cors import CORS
-
+import os
 
 app = Flask(__name__)
 api = Api(app)
 cors = CORS(app)
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost:5432/curate_database"
-app.config['SQLALCHEMY_ECHO'] = True
+if DATABASE_URL:
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL.replace(
+        "://", "ql://", 1)
+    app.config['SQLALCHEMY_ECHO'] = False
+    app.env = 'production'
+else:
+    app.debug = True
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://localhost:5432/curate_database"
+    app.config['SQLALCHEMY_ECHO'] = True
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -37,4 +45,4 @@ api.add_resource(SingleGallery, '/gallery/<int:gallery_id>')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

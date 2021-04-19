@@ -73,6 +73,8 @@ const UserGallery = (props) => {
           deleteAGallery={props.deleteAGallery}
           getDrawings={props.getDrawings}
           galleryDrawings={galleryDrawings}
+          currentUser={currentUser}
+          fetchUserGallery={props.fetchUserGallery}
         />
       </div>
       <div className="draw-card-con">

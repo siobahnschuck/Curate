@@ -37,7 +37,8 @@ const GalleryReducer = (state=iState, action) => {
     case GET_GALLERY_DRAWINGS:
       return {...state, galleryDrawings: action.payload}
     case DELETE_GALLERY:
-      return {...state}
+      let filtered = state.userGalleries.filter((draw) => draw.id !== action.payload)
+      return {...state, userGalleries: filtered}
     case UPDATE_GALLERY:
       return {
         ...state,

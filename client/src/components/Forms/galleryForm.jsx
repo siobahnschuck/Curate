@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createGallery, addGallery } from '../../store/actions/GalleryActions'
-
+import { useHistory } from 'react-router-dom'
 const mapStateToProps = ({ galleryState, authState }) => {
   return { galleryState, authState }
 }
@@ -16,6 +16,7 @@ const mapDispatchToProps = (dispatch) => {
 const GalleryForm = (props) => {
   const { newGallery } = props.galleryState
   const { currentUser } = props.authState
+  const history = useHistory()
   const handleChange = (e) => {
     props.addAGallery(e.target.name, e.target.value)
   }
@@ -25,6 +26,7 @@ const GalleryForm = (props) => {
     let obj = { ...newGallery, user_id: currentUser.id }
     props.createNewGallery(obj)
     props.addAGallery('')
+    history.push('/profile')
   }
   return (
     <div className="gallery-form-container">

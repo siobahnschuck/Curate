@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import '../../css/Form.css'
 import { connect } from 'react-redux'
 import { addUser, getProfileData, updateProfile } from '../../store/actions/AuthActions'
-
+import { useHistory } from 'react-router-dom'
 const mapStateToProps = ({ authState }) => {
   return { authState }
 }
@@ -17,6 +17,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const ProfileForm = (props) => {
   const { registerForm, userInfo, currentUser } = props.authState
+  const history = useHistory()
   useEffect(() => {
     props.fetchProfileData(currentUser.id)
   }, [])
@@ -28,6 +29,7 @@ const ProfileForm = (props) => {
   const handleProfileSubmit = (e) => {
     e.preventDefault()
     props.updateAProfile(3, registerForm)
+    history.push('/profile')
   }
   return (
     <div className="edit-prof-container">

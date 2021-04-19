@@ -11,6 +11,14 @@ const GalleryCard = (props) => {
     props.getDrawings(id)
     history.push(`gallery/details/${id}`)
   }
+
+  const handleGalleryDelete = (e, id, userId) => {
+    e.preventDefault()
+    props.deleteAGallery(id)
+    props.fetchUserGallery(userId)
+  }
+
+
   return (
     <div className="gallery-card" >
       <h2 className="gallery-section-title">{props.userGalleries.length ? props.userGalleries[0].length : 0} galleries</h2>
@@ -21,7 +29,7 @@ const GalleryCard = (props) => {
             <p>{gallery.description}</p>
             <button className="draw-btns" onClick={(e) => handleSubmit(e, gallery.id)}
             ><CgImage /></button>
-            <button className="draw-btns" onClick={() => props.deleteAGallery(gallery.id)}><AiIcons.AiTwotoneDelete /></button>
+            <button className="draw-btns" onClick={(e) => handleGalleryDelete(e, gallery.id, props.currentUser.id)}><AiIcons.AiTwotoneDelete /></button>
           </div>
         ))
         : null}

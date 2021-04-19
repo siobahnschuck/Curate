@@ -13,7 +13,8 @@
 
 ### **_Description_**
 
-![logo](./img/currate_full-01.png) 
+![logo](./img/curate-full-whitebg.jpg) 
+
 A digital art gallery created by it's users.
 
 Curate allows the user to create drawings in their "studio", save them to their profile, and organize them into an exhibition which can be published and shared with friends. When you aren't creating you can browse other exhibitions, and find collaborators. 
@@ -42,10 +43,6 @@ otherwise click [here]() to check out the deployed site.
 
 ### Final Design
 ![studio](./img/studio.png) 
-
-
-### Original Concepts
-
 
 ---
 

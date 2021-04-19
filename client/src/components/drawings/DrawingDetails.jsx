@@ -5,7 +5,7 @@ import { deleteDrawing, getDrawingById, setGalleryId, updateDrawing } from '../.
 import { useParams } from 'react-router'
 import { getUserGallery } from '../../store/actions/GalleryActions'
 import * as AiIcons from 'react-icons/ai'
-
+import { Button } from 'react-bootstrap'
 
 const mapStateToProps = ({ drawState, galleryState }) => {
   return { drawState, galleryState }
@@ -32,7 +32,9 @@ const DrawingDetails = (props) => {
     props.getuserGallery(selectedDrawing.user_id)
     // eslint-disable-next-line
   }, [])
-
+  const redirect = () => {
+    history.push('/profile')
+  }
   const handleSubmit = (e, id, update) => {
     e.preventDefault()
     let updated = {
@@ -63,9 +65,9 @@ const DrawingDetails = (props) => {
           <div className="prof-button-draw">
             <button className="draw-btn"><AiIcons.AiFillSave /></button>
             <button className="draw-btn" onClick={() => props.deleteADrawing(selectedDrawing.id)}><AiIcons.AiTwotoneDelete /></button>
+            <button className="draw-btn" onClick={redirect}><AiIcons.AiOutlineUser /></button>
           </div>
         </form>
-
       </div>
     </div>
   )

@@ -28,7 +28,7 @@ const DrawingDetails = (props) => {
   useEffect(() => {
     props.getDrawing(id)
     props.getuserGallery(selectedDrawing.user_id)
-    // eslint-disable-next-lines
+    // eslint-disable-next-line
   }, [])
 
   const handleSubmit = (e, id, update) => {

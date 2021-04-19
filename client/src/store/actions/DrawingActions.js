@@ -107,11 +107,12 @@ export const updateDrawing = (id, update) => async (dispatch) => {
 //DELETE METHODS
 
 export const deleteDrawing = (filename, id) => async (dispatch) => {
+  console.log('id', id)
   try {
-    const deleted = await DeleteDrawing(filename, id)
+    await DeleteDrawing(filename, id)
     dispatch({
       type: DELETE_DRAWING,
-      payload: deleted
+      payload: id
     })
   } catch (error) {
     throw error

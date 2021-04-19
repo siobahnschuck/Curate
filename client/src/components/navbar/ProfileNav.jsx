@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import LoginForm from '../Forms/loginForm'
-import { Navbar, Nav, NavDropdown, Button, Modal, Alert } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown, Button, Modal } from 'react-bootstrap'
 import * as FaIcons from 'react-icons/fa'
 import * as RiIcons from 'react-icons/ri'
 import { IconContext } from 'react-icons'
@@ -23,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const ProfileNav = (props) => {
   const history = useHistory()
-  const { loginForm, currentUser } = props.authState
+  const { loginForm } = props.authState
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)

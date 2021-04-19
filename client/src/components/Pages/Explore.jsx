@@ -23,7 +23,7 @@ const Explore = (props) => {
   const history = useHistory()
   useEffect(() => {
     props.getAllGalleries()
-    //eslint-disable-next-lines
+    //eslint-disable-next-line
   }, [])
 
   const handleExpand = (id) => {

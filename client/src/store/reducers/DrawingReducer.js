@@ -50,7 +50,8 @@ const DrawingReducer = (state= iState, action) => {
     case CREATE_DRAWING:
       return {...state, newDrawings: action.payload }
     case DELETE_DRAWING:
-      return {...state}
+      let filtered = state.drawings[0].filter((draw) => draw.id !== action.payload)
+      return {...state, drawings: [filtered]}
     case UPDATE_DRAWING:
       return {...state}
     case SET_COLOR:

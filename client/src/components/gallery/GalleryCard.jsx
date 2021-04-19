@@ -14,7 +14,6 @@ const GalleryCard = (props) => {
 
   const handleGalleryDelete = (e, id) => {
     e.preventDefault()
-    console.log("e", e, "id", id)
     props.deleteAGallery(id)
   }
 

@@ -46,8 +46,8 @@ function App(props) {
     if (props.authState.authenticated){
       props.getDrawings(props.authState.currentUser.id)
       props.getuserGallery(props.authState.currentUser.id)
-      // eslint-disable-next-line
     }
+    // eslint-disable-next-line
   }, [])
 
   return (

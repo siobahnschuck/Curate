@@ -7,7 +7,6 @@ const {
   ADD_LOGIN,
   CHECK_SESSION,
   SET_AUTHENTICATED, 
-  SESSION,
   SET_USER_DATA,
 } = require('../types.js')
 

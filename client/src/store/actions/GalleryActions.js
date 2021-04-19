@@ -66,7 +66,6 @@ export const createGallery = (body) => async (dispatch) => {
 }
 
 export const deleteGallery = (id) => async (dispatch) => {
-  console.log(id)
   try {
     await DeleteGallery(id) 
     dispatch({

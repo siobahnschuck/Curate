@@ -8,7 +8,7 @@ import '../../css/Form.css'
 const RegisterForm = (props) => {
   return (
     <div className="home-register-form-con">
-      <p>create an account</p>
+      <h3>create an account</h3>
       <form className="home-form" onSubmit={(e) => props.handleSubmit(e)}>
         <input
           className="reg-in"

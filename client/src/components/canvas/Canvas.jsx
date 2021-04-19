@@ -120,10 +120,10 @@ const Canvas = (props) => {
             onChangeComplete={color => props.SetColor(color.hex)}
           />
         }>
-          <Button size="sm" variant="outline-info" >Select Color</Button>
+          <Button size="sm" variant="outline-info" style={{ backgroundColor: props.colorHexCode, color: "white" }} >Select Color</Button>
         </Tippy>
         {/* <Button size='sm' variant="outline-info" onClick={emojiPen}>Emoji Pen</Button> */}
-        <Button size='sm' variant="outline-info" onClick={ranColor}>Random Color</Button>
+        <Button size='sm' variant="outline-info" onClick={ranColor} style={{ backgroundColor: props.colorHexCode, color: "white" }}>Random Color</Button>
         {/* <Button size="sm" variant="outline-danger" onClick={undo}>undo</Button> */}
         <Button size="sm" variant="outline-danger" onClick={clearDrawing}>clear drawing</Button>
         {props.authenticated ? <form onSubmit={saveDrawing}>

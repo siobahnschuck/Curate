@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { deleteDrawing, getDrawingById, setGalleryId, updateDrawing } from '../../store/actions/DrawingActions'
 import { useParams } from 'react-router'
@@ -25,6 +26,7 @@ const DrawingDetails = (props) => {
   const { selectedDrawing, galleryId } = props.drawState
   const { userGalleries } = props.galleryState
   const { id } = useParams()
+  const history = useHistory()
   useEffect(() => {
     props.getDrawing(id)
     props.getuserGallery(selectedDrawing.user_id)
@@ -37,6 +39,7 @@ const DrawingDetails = (props) => {
       gallery_id: update
     }
     props.updateDrawingGallery(id, updated)
+    history.push('/profile')
   }
   return (
     <div className="draw-deets-container">

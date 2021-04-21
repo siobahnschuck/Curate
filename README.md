@@ -35,7 +35,7 @@ Curate is a social platform based on illustrations.
 ### **_Getting Started_**
 
 To view my Trello board click [here](https://trello.com/b/MXSFGhnY/capstone-cavemind-curate)
-otherwise click [here]() to check out the deployed site.
+otherwise click [here](https://eloquent-galileo-e428a9.netlify.app/) to check out the deployed site.
 
 ---
 
